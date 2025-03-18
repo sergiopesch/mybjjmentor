@@ -29,7 +29,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
         if (entry.isIntersecting) {
           // Add staggered animations based on data attribute
           const delay = entry.target.getAttribute('data-delay') || '0';
-          entry.target.style.transitionDelay = `${delay}ms`;
+          // Fix: Use HTMLElement instead of Element to access style property
+          if (entry.target instanceof HTMLElement) {
+            entry.target.style.transitionDelay = `${delay}ms`;
+          }
           entry.target.classList.add('appear');
           observer.unobserve(entry.target);
         }
