@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,86 +7,50 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 10%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 12%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 12%;
-
-    --primary: 215 60% 15%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 215 60% 15%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215 25% 40%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 215 60% 15%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 215 60% 15%;
-
-    --radius: 0.5rem;
-
-    --bjj-blue: 220 70% 30%;
-    --bjj-purple: 270 60% 40%;
-    --bjj-brown: 30 70% 35%;
-    --bjj-black: 220 20% 10%;
-    --bjj-white: 0 0% 95%;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
     --background: 215 35% 8%;
-    --foreground: 210 40% 98%;
+    --foreground: 0 0% 98%;
 
     --card: 215 35% 10%;
-    --card-foreground: 210 40% 98%;
+    --card-foreground: 0 0% 98%;
 
     --popover: 215 35% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 215 60% 15%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 215 35% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 215 35% 15%;
-    --muted-foreground: 210 40% 80%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 215 35% 15%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 24 95% 53%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
     --border: 215 35% 15%;
     --input: 215 35% 15%;
-    --ring: 210 40% 90%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.5rem;
 
     --bjj-blue: 220 70% 50%;
     --bjj-purple: 270 60% 60%;
     --bjj-brown: 30 70% 50%;
     --bjj-black: 220 20% 5%;
     --bjj-white: 0 0% 95%;
+
+    --sidebar-background: 215 35% 12%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 215 35% 20%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 215 35% 20%;
+    --sidebar-ring: 24 95% 53%;
   }
 }
 
@@ -96,19 +60,19 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-theme-dark text-theme-light font-sans antialiased;
     font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight;
+    @apply font-display tracking-tight font-bold;
   }
 }
 
 /* Custom utility classes */
 @layer components {
   .glass-card {
-    @apply bg-white/70 dark:bg-black/30 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-glass rounded-xl;
+    @apply bg-black/30 backdrop-blur-lg border border-white/10 shadow-glass rounded-xl;
   }
   
   .page-container {
@@ -116,7 +80,7 @@
   }
 
   .section-title {
-    @apply text-2xl sm:text-3xl font-semibold tracking-tight mb-6;
+    @apply text-2xl sm:text-3xl font-bold tracking-tight mb-6;
   }
 
   .fade-in-section {
@@ -125,6 +89,18 @@
 
   .fade-in-section.appear {
     @apply opacity-100 translate-y-0;
+  }
+  
+  .accent-glow {
+    @apply shadow-glow;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-theme to-theme-red bg-clip-text text-transparent;
+  }
+  
+  .orange-beam {
+    @apply relative after:absolute after:w-px after:sm:w-0.5 after:h-full after:bg-gradient-to-b after:from-theme/30 after:to-theme after:inset-0 after:mx-auto after:animate-pulse-glow;
   }
 }
 

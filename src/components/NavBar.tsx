@@ -36,10 +36,10 @@ export const NavBar = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Techniques', path: '/techniques' },
-    { name: 'Training Planner', path: '/planner' },
-    { name: 'Progress', path: '/progress' },
+    { name: 'HOME', path: '/' },
+    { name: 'TECHNIQUES', path: '/techniques' },
+    { name: 'TRAINING PLANNER', path: '/planner' },
+    { name: 'PROGRESS', path: '/progress' },
   ];
 
   const isActive = (path: string) => {
@@ -63,16 +63,19 @@ export const NavBar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled 
-          ? 'bg-background/80 backdrop-blur-lg shadow-sm py-3' 
+          ? 'bg-black/70 backdrop-blur-lg border-b border-white/10 py-3' 
           : 'bg-transparent py-5'
       )}
     >
       <div className="container max-w-6xl px-4 mx-auto flex items-center justify-between">
         <Link 
           to="/" 
-          className="text-xl font-semibold tracking-tight transition-opacity hover:opacity-80"
+          className="text-xl font-bold tracking-tight transition-opacity hover:opacity-80 flex items-center"
         >
-          BJJ<span className="text-bjj-blue">Coach</span>
+          <div className="h-8 w-8 rounded-full bg-theme mr-2 flex items-center justify-center">
+            <div className="h-3 w-3 rounded-full bg-theme-dark"></div>
+          </div>
+          BJJ<span className="text-theme">Coach</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -82,9 +85,9 @@ export const NavBar = () => {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-medium transition-all hover:text-primary',
+                'text-sm font-medium tracking-wide transition-all hover:text-theme uppercase',
                 isActive(link.path)
-                  ? 'text-primary border-b-2 border-primary pb-1'
+                  ? 'text-theme'
                   : 'text-muted-foreground'
               )}
             >
@@ -95,7 +98,7 @@ export const NavBar = () => {
           <Button 
             variant="outline" 
             size="sm" 
-            className="ml-4"
+            className="ml-4 border-theme text-theme hover:bg-theme hover:text-white"
             onClick={handleAuthClick}
           >
             <User className="h-4 w-4 mr-2" />
@@ -105,7 +108,7 @@ export const NavBar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 focus:outline-none"
+          className="md:hidden p-2 focus:outline-none text-theme"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -120,7 +123,7 @@ export const NavBar = () => {
       {/* Mobile Navigation */}
       <div
         className={cn(
-          'fixed inset-0 bg-background/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40',
+          'fixed inset-0 bg-black/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40',
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
         )}
       >
@@ -130,8 +133,8 @@ export const NavBar = () => {
               key={link.path}
               to={link.path}
               className={cn(
-                'text-lg font-medium transition-all hover:text-primary',
-                isActive(link.path) ? 'text-primary' : 'text-muted-foreground'
+                'text-lg font-medium uppercase transition-all hover:text-theme',
+                isActive(link.path) ? 'text-theme' : 'text-muted-foreground'
               )}
             >
               {link.name}
@@ -141,7 +144,7 @@ export const NavBar = () => {
           <Button 
             variant="outline"
             onClick={handleAuthClick}
-            className="mt-4"
+            className="mt-4 border-theme text-theme hover:bg-theme hover:text-white"
           >
             <User className="h-4 w-4 mr-2" />
             {user ? 'Sign Out' : 'Sign In'}

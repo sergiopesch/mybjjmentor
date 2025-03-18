@@ -46,15 +46,17 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-theme-dark text-theme-light overflow-x-hidden">
       <NavBar />
-      <main className="flex-grow">
+      <main className="flex-grow relative">
+        {/* Background image overlay */}
+        <div className="absolute inset-0 bg-dark-clouds bg-cover bg-center bg-no-repeat opacity-50 pointer-events-none -z-10"></div>
         {children}
       </main>
-      <footer className="py-8 bg-secondary/50 backdrop-blur-sm border-t border-border">
+      <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10">
         <div className="container max-w-6xl px-4 mx-auto text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} BJJ Coach. All rights reserved.
+            © {new Date().getFullYear()} BJJ<span className="text-theme">Coach</span>. All rights reserved.
           </p>
         </div>
       </footer>

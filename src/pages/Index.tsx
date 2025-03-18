@@ -13,10 +13,10 @@ const Index = () => {
     <MainLayout>
       <Hero />
       
-      <section className="py-16 relative overflow-hidden">
+      <section className="py-20 relative overflow-hidden">
         <div className="container max-w-6xl px-4 mx-auto">
-          <div className="mb-12 text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">
+          <div className="mb-16 text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
               Your Personal BJJ Guide
             </h2>
             <p className="text-muted-foreground">
@@ -50,48 +50,46 @@ const Index = () => {
         </div>
       </section>
       
-      <section className="py-16 bg-gradient-to-b from-background to-secondary/30 fade-in-section">
+      <section className="py-20 bg-black/30 backdrop-blur-sm fade-in-section relative">
+        <div className="absolute inset-0 orange-beam -z-10"></div>
         <div className="container max-w-6xl px-4 mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold tracking-tight">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight uppercase">
               Featured Techniques
             </h2>
           </div>
 
           <TechniqueLibrary />
           
-          <div className="mt-8 text-center">
+          <div className="mt-12 text-center">
             <Link to="/techniques">
-              <Button size="lg" variant="outline">
-                Explore All Techniques
+              <Button size="lg" variant="outline" className="border-theme/50 text-theme hover:border-theme">
+                EXPLORE ALL TECHNIQUES
               </Button>
             </Link>
           </div>
         </div>
       </section>
       
-      <section className="py-20 bg-background relative overflow-hidden fade-in-section">
-        <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-bjj-blue/5 -z-10"></div>
-        <div className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-bjj-purple/5 -z-10"></div>
-      
+      <section className="py-24 relative overflow-hidden fade-in-section">
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 uppercase">
               Start Your BJJ Journey
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-10">
               Whether you're just beginning or looking to refine your skills, 
               our comprehensive tools will help you progress and excel in Brazilian Jiu-Jitsu.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link to="/planner">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Create Training Plan
+                <Button size="lg" className="w-full sm:w-auto bg-theme hover:bg-theme/80 text-white">
+                  CREATE TRAINING PLAN
                 </Button>
               </Link>
               <Link to="/progress">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  Track Your Progress
+                <Button size="lg" variant="outline" className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme">
+                  TRACK YOUR PROGRESS
                 </Button>
               </Link>
             </div>
