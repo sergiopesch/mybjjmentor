@@ -18,7 +18,7 @@ export const SocialButton = ({
   loading, 
   onClick 
 }: SocialButtonProps) => {
-  const providerName = provider === 'twitter' ? 'X (Twitter)' : provider.charAt(0).toUpperCase() + provider.slice(1);
+  const providerName = provider === 'twitter' ? 'X' : provider.charAt(0).toUpperCase() + provider.slice(1);
   
   return (
     <Button 

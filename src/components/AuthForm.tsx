@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Twitter } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { SocialButton } from './auth/SocialButton';
@@ -9,6 +8,7 @@ import { AuthErrorAlert } from './auth/AuthErrorAlert';
 import { AuthFooter } from './auth/AuthFooter';
 import { useNavigate } from 'react-router-dom';
 import { GoogleIcon } from './auth/GoogleIcon';
+import { XIcon } from './auth/XIcon';
 
 export const AuthForm = () => {
   const [loading, setLoading] = useState<{[key: string]: boolean}>({
@@ -35,9 +35,16 @@ export const AuthForm = () => {
       
       toast.success(`Redirecting to ${provider} login...`);
     } catch (err: any) {
-      setError(err.message || 'Authentication failed. Please try again.');
-      toast.error('Authentication failed. Please try again.');
-      console.error(err);
+      console.error('Authentication error:', err);
+      let errorMessage = err.message || 'Authentication failed. Please try again.';
+      
+      // Provide more helpful error message for the specific error
+      if (err.message.includes('provider is not enabled')) {
+        errorMessage = `${provider.charAt(0).toUpperCase() + provider.slice(1)} login is not enabled. Please ask the administrator to enable it in Supabase.`;
+      }
+      
+      setError(errorMessage);
+      toast.error(errorMessage);
     } finally {
       setLoading(prev => ({ ...prev, [provider]: false }));
     }
@@ -67,7 +74,7 @@ export const AuthForm = () => {
           
           <SocialButton 
             provider="twitter" 
-            icon={Twitter} 
+            CustomIcon={XIcon}
             loading={loading.twitter} 
             onClick={() => handleSocialSignIn('twitter')} 
           />
