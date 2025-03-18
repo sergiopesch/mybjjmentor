@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Google, Twitter } from 'lucide-react';
+import { Twitter } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { SocialButton } from './auth/SocialButton';
 import { AuthErrorAlert } from './auth/AuthErrorAlert';
 import { AuthFooter } from './auth/AuthFooter';
 import { useNavigate } from 'react-router-dom';
+import { GoogleIcon } from './auth/GoogleIcon';
 
 export const AuthForm = () => {
   const [loading, setLoading] = useState<{[key: string]: boolean}>({
@@ -59,7 +60,7 @@ export const AuthForm = () => {
         <div className="flex flex-col space-y-4">
           <SocialButton 
             provider="google" 
-            icon={Google} 
+            CustomIcon={GoogleIcon}
             loading={loading.google} 
             onClick={() => handleSocialSignIn('google')} 
           />
