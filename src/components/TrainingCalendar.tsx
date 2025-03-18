@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { format, startOfToday, eachDayOfInterval, endOfMonth, startOfMonth, getDay, add, parse, isToday, isSameDay, isEqual, parseISO } from 'date-fns';
 import { 
@@ -512,7 +511,7 @@ export const TrainingCalendar = () => {
                       {format(parseISO(selectedSession.date), 'PPP')} at {selectedSession.time}
                     </div>
                   </div>
-                  <Badge variant={selectedSession.completed ? "success" : "secondary"}>
+                  <Badge variant={selectedSession.completed ? "secondary" : "outline"}>
                     {selectedSession.completed ? "Completed" : "Upcoming"}
                   </Badge>
                 </div>
