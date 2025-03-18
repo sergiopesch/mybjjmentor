@@ -92,3 +92,191 @@
   left: -50%;
   opacity: 1;
 }
+
+/* New Advanced Animation Effects */
+
+/* Liquid reveal effect for images */
+.liquid-mask {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-mask::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ea384c;
+  z-index: 1;
+  transform: translateY(100%);
+  transition: transform 0s;
+}
+
+.liquid-mask::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ea384c;
+  z-index: 2;
+  transform: translateY(100%);
+  transition: transform 0s;
+}
+
+.liquid-mask.liquid-reveal::before {
+  transform: translateY(0%);
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.liquid-mask.liquid-reveal::after {
+  transform: translateY(0%);
+  animation: liquidWave 1.2s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+.liquid-mask img,
+.liquid-mask .content {
+  position: relative;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s;
+}
+
+.liquid-mask.liquid-reveal img,
+.liquid-mask.liquid-reveal .content {
+  opacity: 1;
+  transition: opacity 0s;
+  transition-delay: 0.8s;
+}
+
+@keyframes liquidWave {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Particle canvas styling */
+.particle-section {
+  position: relative;
+}
+
+.particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Magnetic elements that attract to cursor */
+.magnetic {
+  display: inline-block;
+  transition: transform 0.1s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+/* Split text animation */
+.char-reveal {
+  display: inline-block;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+}
+
+/* Layered 3D container */
+.layered-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.layer-item {
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+              opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, opacity;
+}
+
+/* Smooth scroll sections */
+.smooth-scroll-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spotlight effect with gradient glow */
+.spotlight-effect {
+  position: relative;
+  transition: background 0.6s ease-out;
+}
+
+.spotlight-effect.spotlight-active {
+  will-change: background;
+}
+
+/* Enhanced stagger items */
+.stagger-item {
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+}
+
+.stagger-item.stagger-appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mouse-track {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .magnetic {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  /* Simplify animations on mobile */
+  .parallax-element {
+    transform: none !important;
+  }
+  
+  /* Ensure card hover effects still look good on touch devices */
+  .effect-card:hover {
+    transform: none;
+  }
+}
+
+/* Prefers-reduced-motion support */
+@media (prefers-reduced-motion) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .parallax-element,
+  .stagger-item,
+  .layer-item,
+  .perspective-section,
+  .magnetic,
+  .mouse-track,
+  .fade-in-section,
+  .slide-in-section,
+  .rotate-in-section {
+    transform: none !important;
+    transition: opacity 0.1s linear !important;
+    animation: none !important;
+  }
+}
