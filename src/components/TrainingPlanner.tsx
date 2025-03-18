@@ -322,7 +322,7 @@ export const TrainingPlanner = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="flex items-center">
-                  <DumbBell className="mr-2 h-5 w-5 text-bjj-blue" />
+                  <Dumbbell className="mr-2 h-5 w-5 text-bjj-blue" />
                   Session Breakdown
                 </CardTitle>
                 <div className="flex items-center">
