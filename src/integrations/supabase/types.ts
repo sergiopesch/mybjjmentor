@@ -9,7 +9,158 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      bjj_techniques: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          difficulty: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+          video_url: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          difficulty: string
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+          video_url?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          difficulty?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      progress_logs: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          notes: string
+          proficiency: number
+          technique_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          notes: string
+          proficiency: number
+          technique_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          notes?: string
+          proficiency?: number
+          technique_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "progress_logs_technique_id_fkey"
+            columns: ["technique_id"]
+            isOneToOne: false
+            referencedRelation: "bjj_techniques"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      training_sessions: {
+        Row: {
+          created_at: string
+          date: string
+          description: string
+          end_time: string
+          id: string
+          start_time: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          description: string
+          end_time: string
+          id?: string
+          start_time: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          description?: string
+          end_time?: string
+          id?: string
+          start_time?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          avatar_url: string | null
+          belt_rank: string | null
+          created_at: string
+          experience_years: number | null
+          full_name: string | null
+          goals: string | null
+          id: string
+          updated_at: string
+          user_id: string
+          weight_class: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          belt_rank?: string | null
+          created_at?: string
+          experience_years?: number | null
+          full_name?: string | null
+          goals?: string | null
+          id: string
+          updated_at?: string
+          user_id: string
+          weight_class?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          belt_rank?: string | null
+          created_at?: string
+          experience_years?: number | null
+          full_name?: string | null
+          goals?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+          weight_class?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
