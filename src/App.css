@@ -41,3 +41,54 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Enhanced animations */
+.floating-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glowing-element {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Hover effect for cards */
+.effect-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.effect-card::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(234, 56, 76, 0.15) 0%, transparent 70%);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  z-index: -1;
+}
+
+.effect-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.effect-card:hover::before {
+  top: -50%;
+  left: -50%;
+  opacity: 1;
+}
