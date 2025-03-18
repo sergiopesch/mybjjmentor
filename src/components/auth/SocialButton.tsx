@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { LucideIcon } from 'lucide-react';
 
 interface SocialButtonProps {
-  provider: 'google' | 'twitter' | 'github';
+  provider: 'google' | 'twitter';
   icon: LucideIcon;
   loading: boolean;
   onClick: () => void;
