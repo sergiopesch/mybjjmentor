@@ -56,7 +56,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10">
         <div className="container max-w-6xl px-4 mx-auto text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} BJJ<span className="text-theme">Coach</span>. All rights reserved.
+            © {new Date().getFullYear()} <span className="text-theme">Master</span>. All rights reserved.
           </p>
         </div>
       </footer>

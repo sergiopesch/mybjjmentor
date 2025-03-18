@@ -26,7 +26,7 @@ export const Hero = () => {
           
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative z-10">
-            {/* Orange vertical beam */}
+            {/* Red vertical beam */}
             <div className="absolute inset-0 orange-beam"></div>
             
             <div className="text-center p-8 animate-fade-up" style={{ animationDelay: '200ms' }}>

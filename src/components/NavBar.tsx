@@ -75,7 +75,7 @@ export const NavBar = () => {
           <div className="h-8 w-8 rounded-full bg-theme mr-2 flex items-center justify-center">
             <div className="h-3 w-3 rounded-full bg-theme-dark"></div>
           </div>
-          BJJ<span className="text-theme">Coach</span>
+          <span className="text-theme">Master</span>
         </Link>
 
         {/* Desktop Navigation */}
