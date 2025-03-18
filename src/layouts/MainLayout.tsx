@@ -3,6 +3,7 @@ import React from 'react';
 import { NavBar } from '@/components/NavBar';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { setupScrollAnimations } from '@/lib/animations';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -18,54 +19,8 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
 
   // Enhanced intersection observer for more sophisticated reveal animations
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Add staggered animations based on data attribute
-          const delay = entry.target.getAttribute('data-delay') || '0';
-          // Fix: Use HTMLElement instead of Element to access style property
-          if (entry.target instanceof HTMLElement) {
-            entry.target.style.transitionDelay = `${delay}ms`;
-          }
-          entry.target.classList.add('appear');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Target all elements with fade-in classes
-    const fadeElements = document.querySelectorAll('.fade-in-section');
-    fadeElements.forEach((element, index) => {
-      // Add staggered delay to elements
-      element.setAttribute('data-delay', `${index * 100}`);
-      observer.observe(element);
-    });
-
-    // Add special animations for specific elements
-    const slideElements = document.querySelectorAll('.slide-in-section');
-    slideElements.forEach((element, index) => {
-      element.setAttribute('data-delay', `${index * 150}`);
-      observer.observe(element);
-    });
-
-    // Add 3D rotate animations
-    const rotateElements = document.querySelectorAll('.rotate-in-section');
-    rotateElements.forEach((element, index) => {
-      element.setAttribute('data-delay', `${index * 120}`);
-      observer.observe(element);
-    });
-
-    return () => {
-      fadeElements.forEach(element => observer.unobserve(element));
-      slideElements.forEach(element => observer.unobserve(element));
-      rotateElements.forEach(element => observer.unobserve(element));
-    };
+    const cleanupAnimations = setupScrollAnimations();
+    return cleanupAnimations;
   }, [location.pathname]);
 
   return (

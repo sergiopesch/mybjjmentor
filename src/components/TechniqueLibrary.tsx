@@ -89,7 +89,7 @@ export const TechniqueLibrary = () => {
   return (
     <section className="py-12">
       <div className="container max-w-6xl px-4 mx-auto">
-        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 perspective-section">
           <h2 className="text-3xl font-bold tracking-tight">Technique Library</h2>
           <Tabs defaultValue="All" className="w-full md:w-auto">
             <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full md:w-auto">
@@ -107,15 +107,17 @@ export const TechniqueLibrary = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1 space-y-4">
-            {filteredTechniques.map(technique => (
+          <div className="lg:col-span-1 space-y-4 stagger-container">
+            {filteredTechniques.map((technique, index) => (
               <div 
                 key={technique.id}
-                className={`glass-card p-4 cursor-pointer transition-all hover:shadow-md ${selectedTechnique.id === technique.id ? 'ring-2 ring-bjj-blue ring-offset-2' : ''}`}
+                className={`glass-card p-4 cursor-pointer transition-all hover:shadow-card-hover stagger-item mouse-track ${selectedTechnique.id === technique.id ? 'ring-2 ring-bjj-blue ring-offset-2' : ''}`}
                 onClick={() => {
                   setSelectedTechnique(technique);
                   setShowVideo(false);
                 }}
+                data-sensitivity="20"
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-medium">{technique.title}</h3>
@@ -129,8 +131,8 @@ export const TechniqueLibrary = () => {
             ))}
           </div>
 
-          <div className="lg:col-span-2">
-            <Card className="overflow-hidden">
+          <div className="lg:col-span-2 perspective-section">
+            <Card className="overflow-hidden mouse-track" data-sensitivity="10">
               <div className="aspect-video bg-muted relative">
                 {showVideo ? (
                   <VideoPlayer url={selectedTechnique.videoUrl} />
