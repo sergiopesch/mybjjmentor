@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, Github, X, Loader2 } from 'lucide-react';
+import { Mail, Github, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { SocialButton } from './auth/SocialButton';
@@ -11,6 +11,23 @@ import { useNavigate } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+
+// Create custom X logo component to match latest design
+const XLogo = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M4 4l11.733 16H20L8.267 4H4z" />
+    <path d="M4 20h4l6.768-9.328" />
+  </svg>
+);
+
+// Create custom Google logo component
+const GoogleLogo = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12h8" />
+    <path d="M12 8v8" />
+  </svg>
+);
 
 export const AuthForm = () => {
   const [loading, setLoading] = useState<{[key: string]: boolean}>({
@@ -123,7 +140,7 @@ export const AuthForm = () => {
         <div className="flex flex-col space-y-4">
           <SocialButton 
             provider="google" 
-            icon={Mail} 
+            icon={GoogleLogo} 
             loading={loading.google} 
             onClick={() => handleSocialSignIn('google')} 
           />
@@ -137,7 +154,7 @@ export const AuthForm = () => {
           
           <SocialButton 
             provider="twitter" 
-            icon={X} 
+            icon={XLogo} 
             loading={loading.twitter} 
             onClick={() => handleSocialSignIn('twitter')} 
           />

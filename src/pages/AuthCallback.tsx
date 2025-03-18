@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 const AuthCallback = () => {
   const [error, setError] = useState<string | null>(null);
@@ -41,10 +42,12 @@ const AuthCallback = () => {
         }
         
         // Successfully authenticated
+        toast.success('Successfully signed in');
         navigate('/planner');
       } catch (err: any) {
         console.error('Error during authentication:', err);
         setError(err.message || 'Authentication failed');
+        toast.error('Authentication failed. Please try again.');
         setTimeout(() => navigate('/auth'), 3000);
       }
     };
