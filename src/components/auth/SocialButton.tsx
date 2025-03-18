@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { LucideIcon } from 'lucide-react';
 
 interface SocialButtonProps {
-  provider: 'google' | 'twitter';
+  provider: 'google' | 'twitter' | 'github';
   icon: LucideIcon;
   loading: boolean;
   onClick: () => void;
@@ -16,7 +16,7 @@ export const SocialButton = ({
   loading, 
   onClick 
 }: SocialButtonProps) => {
-  const providerName = provider === 'twitter' ? 'X' : 'Google';
+  const providerName = provider === 'twitter' ? 'X' : provider.charAt(0).toUpperCase() + provider.slice(1);
   
   return (
     <Button 
