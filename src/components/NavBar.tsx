@@ -4,13 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/providers/AuthProvider';
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // This will be handled by Supabase auth state
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   // Handle scroll effect
   useEffect(() => {
@@ -48,11 +49,10 @@ export const NavBar = () => {
     return location.pathname.startsWith(path);
   };
 
-  const handleAuthClick = () => {
-    if (isLoggedIn) {
-      // Handle logout - will be implemented with Supabase
-      console.log('Logging out');
-      setIsLoggedIn(false);
+  const handleAuthClick = async () => {
+    if (user) {
+      await signOut();
+      navigate('/');
     } else {
       navigate('/auth');
     }
@@ -99,7 +99,7 @@ export const NavBar = () => {
             onClick={handleAuthClick}
           >
             <User className="h-4 w-4 mr-2" />
-            {isLoggedIn ? 'Profile' : 'Sign In'}
+            {user ? 'Sign Out' : 'Sign In'}
           </Button>
         </nav>
 
@@ -144,7 +144,7 @@ export const NavBar = () => {
             className="mt-4"
           >
             <User className="h-4 w-4 mr-2" />
-            {isLoggedIn ? 'Profile' : 'Sign In'}
+            {user ? 'Sign Out' : 'Sign In'}
           </Button>
         </nav>
       </div>
