@@ -168,7 +168,7 @@ function createScrollObserver({
   animationHandler,
   unobserveOnIntersect = true
 }: ScrollObserverOptions) {
-  return new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         animationHandler(entry);
@@ -179,4 +179,6 @@ function createScrollObserver({
       }
     });
   }, { root, rootMargin, threshold });
+
+  return observer;
 }
