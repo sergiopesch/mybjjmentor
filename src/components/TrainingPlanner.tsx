@@ -25,7 +25,7 @@ import {
   Award, 
   BarChart3, 
   Calendar, 
-  DumbBell 
+  Dumbbell 
 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
