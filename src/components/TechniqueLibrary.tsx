@@ -1,18 +1,15 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Play, Info, BookOpen, AlignLeft } from 'lucide-react';
-import { VideoPlayer } from './VideoPlayer';
+import { VideoPlayer } from './video-player';
 
-// Define props interface for the component
 interface TechniqueLibraryProps {
   searchQuery?: string;
 }
 
-// Sample technique data
 const techniques = [
   {
     id: 1,
@@ -87,7 +84,6 @@ export const TechniqueLibrary = ({ searchQuery = '' }: TechniqueLibraryProps) =>
   const categories = ['All', 'Submissions', 'Sweeps', 'Passes', 'Escapes'];
   const [activeCategory, setActiveCategory] = useState('All');
 
-  // Filter techniques by both category and search query
   const filteredTechniques = techniques.filter(technique => {
     const matchesCategory = activeCategory === 'All' || technique.category === activeCategory;
     const matchesSearch = searchQuery === '' || 

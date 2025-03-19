@@ -1,14 +1,15 @@
 
 import React, { useState, useRef } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, SkipBack, SkipForward } from 'lucide-react';
-import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
+import { VideoProgressBar } from './VideoProgressBar';
+import { VideoControlBar } from './VideoControlBar';
+import { PlayButton } from './PlayButton';
 
 interface VideoPlayerProps {
   url: string;
 }
 
-export const VideoPlayer = ({ url }: VideoPlayerProps) => {
+export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -103,13 +104,6 @@ export const VideoPlayer = ({ url }: VideoPlayerProps) => {
     }
   };
 
-  // Format time as mm:ss
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
-
   return (
     <div 
       className="relative w-full h-full bg-black"
@@ -135,86 +129,30 @@ export const VideoPlayer = ({ url }: VideoPlayerProps) => {
           showControls ? "opacity-100" : "opacity-0"
         )}
       >
-        {/* Progress bar */}
-        <Slider
-          value={[currentTime]}
-          min={0}
-          max={duration || 100}
-          step={0.1}
-          onValueChange={handleSeek}
-          className="mb-4"
+        <VideoProgressBar 
+          currentTime={currentTime}
+          duration={duration}
+          onSeek={handleSeek}
         />
         
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <button 
-              onClick={togglePlay}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            >
-              {isPlaying ? (
-                <Pause className="w-4 h-4 text-white" />
-              ) : (
-                <Play className="w-4 h-4 text-white" />
-              )}
-            </button>
-            
-            <button 
-              onClick={skipBackward}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            >
-              <SkipBack className="w-4 h-4 text-white" />
-            </button>
-            
-            <button 
-              onClick={skipForward}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            >
-              <SkipForward className="w-4 h-4 text-white" />
-            </button>
-            
-            <div className="text-xs text-white">
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="hidden sm:flex items-center space-x-2">
-              <button onClick={toggleMute}>
-                {isMuted ? (
-                  <VolumeX className="w-4 h-4 text-white" />
-                ) : (
-                  <Volume2 className="w-4 h-4 text-white" />
-                )}
-              </button>
-              
-              <Slider
-                value={[isMuted ? 0 : volume]}
-                min={0}
-                max={1}
-                step={0.01}
-                onValueChange={handleVolumeChange}
-                className="w-20"
-              />
-            </div>
-            
-            <button 
-              onClick={handleFullscreen}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            >
-              <Maximize className="w-4 h-4 text-white" />
-            </button>
-          </div>
-        </div>
+        <VideoControlBar 
+          isPlaying={isPlaying}
+          currentTime={currentTime}
+          duration={duration}
+          volume={volume}
+          isMuted={isMuted}
+          onTogglePlay={togglePlay}
+          onSkipBackward={skipBackward}
+          onSkipForward={skipForward}
+          onVolumeChange={handleVolumeChange}
+          onToggleMute={toggleMute}
+          onFullscreen={handleFullscreen}
+        />
       </div>
       
       {/* Play/Pause center button overlay (visible only when controls are shown and video is not playing) */}
       {showControls && !isPlaying && (
-        <button
-          onClick={togglePlay}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors"
-        >
-          <Play className="w-8 h-8 text-white" />
-        </button>
+        <PlayButton onClick={togglePlay} isLarge={true} />
       )}
     </div>
   );

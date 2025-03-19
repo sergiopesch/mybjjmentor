@@ -8,7 +8,7 @@ import {
   CarouselPrevious 
 } from '@/components/ui/carousel';
 import { Card, CardContent } from '@/components/ui/card';
-import { VideoPlayer } from './VideoPlayer';
+import { VideoPlayer } from './video-player';
 import { Badge } from '@/components/ui/badge';
 import { Play, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
