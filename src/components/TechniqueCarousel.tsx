@@ -10,8 +10,9 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { VideoPlayer } from './video-player';
 import { Badge } from '@/components/ui/badge';
-import { Play, Info, Clock, Award } from 'lucide-react';
+import { Play, Award, Clock, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Sample technique data with enhanced metadata
 const techniques = [
@@ -62,100 +63,94 @@ const techniques = [
 ];
 
 export const TechniqueCarousel = () => {
-  // Track which technique is being hovered
-  const [hoveredTechnique, setHoveredTechnique] = useState<number | null>(null);
-  // Track which video is being played
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
-
+  const isMobile = useIsMobile();
+  
   return (
     <Carousel 
       className="w-full max-w-5xl mx-auto"
       opts={{
         align: "start",
-        loop: true
+        loop: true,
+        dragFree: true
       }}
     >
       <CarouselContent className="-ml-2 md:-ml-4">
         {techniques.map(technique => (
-          <CarouselItem key={technique.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-            <div className="p-1">
-              <Card 
-                className="overflow-hidden border-0 shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:shadow-theme/10"
-                onMouseEnter={() => setHoveredTechnique(technique.id)}
-                onMouseLeave={() => setHoveredTechnique(null)}
-              >
-                <div className="aspect-video relative group">
-                  {playingVideo === technique.id ? (
-                    <div className="h-full">
-                      <VideoPlayer url={technique.videoUrl} />
-                    </div>
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-black/80 to-black/60 group-hover:from-black/60 group-hover:to-black/40 transition-all duration-300">
+          <CarouselItem 
+            key={technique.id} 
+            className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+          >
+            <Card 
+              className="overflow-hidden border-0 shadow-lg rounded-lg transition-all duration-300 hover:shadow-card-hover"
+            >
+              <div className="aspect-video relative group">
+                {playingVideo === technique.id ? (
+                  <div className="h-full">
+                    <VideoPlayer url={technique.videoUrl} />
+                    <Button 
+                      onClick={() => setPlayingVideo(null)}
+                      className="absolute top-2 right-2 z-20 bg-black/50 hover:bg-black/80 w-8 h-8 p-0 rounded-full"
+                      size="icon"
+                      aria-label="Close video"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center opacity-80"
+                      style={{ backgroundImage: `url('${technique.thumbnail}')` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50 transition-all duration-300 group-hover:from-black/60 group-hover:to-black/40">
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                      
+                    </div>
+                    
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <Button 
                         onClick={() => setPlayingVideo(technique.id)} 
                         size="lg" 
-                        className="relative z-10 bg-theme hover:bg-theme/80 rounded-full w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-glow shadow-theme/20"
+                        className="relative z-10 bg-theme hover:bg-theme/90 rounded-full w-16 h-16 flex items-center justify-center transition-transform duration-300 transform group-hover:scale-110 shadow-glow shadow-theme/20"
                       >
                         <Play className="w-8 h-8 text-white ml-1" />
                       </Button>
-                      
-                      <div className="absolute bottom-0 w-full p-4 text-white z-10">
-                        <div className="flex justify-between items-center mb-1">
-                          <h3 className="text-xl font-bold">{technique.title}</h3>
-                          <Badge className="bg-theme/80 hover:bg-theme text-white border-none">{technique.level}</Badge>
+                    </div>
+                    
+                    <div className="absolute bottom-0 w-full p-4 text-white z-10">
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-xl font-bold line-clamp-1">{technique.title}</h3>
+                        <Badge className="bg-theme hover:bg-theme/90 text-white border-none whitespace-nowrap ml-2 shrink-0">
+                          {technique.level}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <Award className="h-3.5 w-3.5 text-theme mr-1.5" />
+                          <p className="text-sm text-white/90">{technique.instructor}</p>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm text-white/80">{technique.category}</p>
-                          <div className="flex items-center text-xs text-white/70">
-                            <Clock className="h-3 w-3 mr-1" />
-                            {technique.duration}
-                          </div>
+                        <div className="flex items-center text-xs text-white/80">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {technique.duration}
                         </div>
                       </div>
+                      
+                      {!isMobile && (
+                        <p className="text-sm text-white/80 line-clamp-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                          {technique.description}
+                        </p>
+                      )}
                     </div>
-                  )}
-                  
-                  {/* Preview image (replace with actual technique thumbnails in production) */}
-                  {playingVideo !== technique.id && (
-                    <div className="absolute inset-0 z-0 bg-cover bg-center opacity-80"
-                         style={{ backgroundImage: `url('${technique.thumbnail}')` }}>
-                    </div>
-                  )}
-                </div>
-                
-                {hoveredTechnique === technique.id && playingVideo !== technique.id && (
-                  <CardContent className="p-4 bg-black/90">
-                    <div className="flex items-center mb-2">
-                      <Award className="h-4 w-4 text-theme mr-1" />
-                      <span className="text-xs text-theme">{technique.instructor}</span>
-                    </div>
-                    <p className="text-sm text-white/80 line-clamp-2">{technique.description}</p>
-                  </CardContent>
+                  </>
                 )}
-                
-                {/* Add a close button when video is playing */}
-                {playingVideo === technique.id && (
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setPlayingVideo(null);
-                    }}
-                    className="absolute top-2 right-2 z-20 bg-black/50 hover:bg-black/80 w-8 h-8 rounded-full flex items-center justify-center text-white"
-                    aria-label="Close video"
-                  >
-                    ✕
-                  </button>
-                )}
-              </Card>
-            </div>
+              </div>
+            </Card>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="flex justify-center mt-6 gap-2">
-        <CarouselPrevious className="relative left-0 bg-theme/10 hover:bg-theme/20 text-white border-none" />
-        <CarouselNext className="relative right-0 bg-theme/10 hover:bg-theme/20 text-white border-none" />
+      <div className="flex justify-center mt-6 gap-4">
+        <CarouselPrevious className="relative left-0 bg-theme/10 hover:bg-theme/20 text-white border-theme/20 hover:border-theme/30" />
+        <CarouselNext className="relative right-0 bg-theme/10 hover:bg-theme/20 text-white border-theme/20 hover:border-theme/30" />
       </div>
     </Carousel>
   );

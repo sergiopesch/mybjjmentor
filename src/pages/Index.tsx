@@ -79,7 +79,7 @@ const Index = () => {
         </div>
       </section>
       
-      <section className="py-16 md:py-24 bg-black/30 backdrop-blur-sm relative overflow-hidden reveal-section" id="master-techniques">
+      <section id="master-techniques" className="py-16 md:py-24 bg-black/30 backdrop-blur-sm relative overflow-hidden reveal-section">
         <div className="absolute -right-20 top-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="left" data-parallax-speed="5"></div>
         
         <div className="absolute -left-20 bottom-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="right" data-parallax-speed="7"></div>
@@ -97,7 +97,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="stagger-item">
+          <div className="technique-carousel-container stagger-item">
             <TechniqueCarousel />
           </div>
           

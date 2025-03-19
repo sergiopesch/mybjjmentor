@@ -3,10 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const isMobile = useIsMobile();
 
   // Create split text animation with improved timing and effects
   useEffect(() => {
@@ -25,7 +27,7 @@ export const Hero = () => {
     // Create spans for "A FRAMEWORK TO" (white text)
     const frameworkSpan = document.createElement('span');
     frameworkSpan.className = 'text-white';
-    frameworkSpan.innerText = "A FRAMEWORK TO ";
+    frameworkSpan.innerText = isMobile ? "FRAMEWORK " : "A FRAMEWORK TO ";
     
     // Create spans for "MASTERY" (theme text)
     const masterySpan = document.createElement('span');
@@ -65,7 +67,7 @@ export const Hero = () => {
       container.classList.add('animate');
       setIsLoaded(true);
     }, 200);
-  }, []);
+  }, [isMobile]);
   
   return (
     <section className="relative pt-20 sm:pt-28 md:pt-32 lg:pt-40 pb-20 sm:pb-24 md:pb-28 lg:pb-32 overflow-hidden">
@@ -80,13 +82,25 @@ export const Hero = () => {
       {/* Content */}
       <div className="container max-w-6xl px-4 mx-auto relative">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* Updated heading format with white/theme text split */}
-          <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 uppercase leading-tight hyphens-auto px-2 break-words">
-            <span className="text-white">A FRAMEWORK TO</span> <span className="text-theme">MASTERY</span>
+          {/* Updated heading format with white/theme text split and mobile optimization */}
+          <h1 
+            ref={titleRef} 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 uppercase leading-tight px-2"
+          >
+            {isMobile ? (
+              <>
+                <span className="text-white block mb-1">FRAMEWORK</span> 
+                <span className="text-theme">MASTERY</span>
+              </>
+            ) : (
+              <>
+                <span className="text-white">A FRAMEWORK TO</span> <span className="text-theme">MASTERY</span>
+              </>
+            )}
           </h1>
           
           <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-muted-foreground mb-8 md:mb-12 perspective-section max-w-2xl mx-auto animate-fade-in">
-            SUPPORT YOUR GROWTH EVERY STEP OF THE WAY — NO MATTER WHERE YOU ARE
+            SUPPORT YOUR GROWTH EVERY STEP OF THE WAY
           </p>
           
           {/* Stats Section with improved visual effects and staggered animation */}

@@ -10,6 +10,47 @@
   .effect-card:hover {
     transform: none;
   }
+  
+  /* Optimize video player controls for mobile */
+  .video-controls {
+    padding: 16px 12px;
+  }
+  
+  /* Ensure proper text wrapping on mobile */
+  h1, h2, h3 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Make buttons more touch-friendly */
+  .btn, button {
+    min-height: 44px;
+  }
+  
+  /* Better spacing for technique cards */
+  .technique-card {
+    margin-bottom: 1rem;
+  }
+  
+  /* Optimize carousel for mobile */
+  .carousel-navigation {
+    margin-top: 1rem;
+  }
+}
+
+/* Ensure proper video sizing in carousel */
+.technique-carousel-container .aspect-video {
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  position: relative;
+}
+
+.technique-carousel-container .aspect-video > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Prefers-reduced-motion support */
@@ -27,9 +68,20 @@
   .perspective-section,
   .fade-in-section,
   .slide-in-section,
-  .rotate-in-section {
+  .rotate-in-section,
+  .animated-gradient {
     transform: none !important;
     transition: opacity 0.1s linear !important;
     animation: none !important;
+    background: #ea384c !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    color: inherit !important;
+  }
+  
+  .split-letter {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

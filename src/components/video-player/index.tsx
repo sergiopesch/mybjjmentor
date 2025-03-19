@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { VideoProgressBar } from './VideoProgressBar';
 import { VideoControlBar } from './VideoControlBar';
 import { PlayButton } from './PlayButton';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface VideoPlayerProps {
   url: string;
@@ -21,13 +22,18 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const isMobile = useIsMobile();
 
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
       } else {
-        videoRef.current.play();
+        videoRef.current.play().catch(err => {
+          console.error("Error playing video:", err);
+          // Handle autoplay restrictions
+          setShowControls(true);
+        });
       }
       setIsPlaying(!isPlaying);
     }
@@ -71,7 +77,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   const toggleMute = () => {
     if (videoRef.current) {
       if (isMuted) {
-        videoRef.current.volume = volume;
+        videoRef.current.volume = volume > 0 ? volume : 0.5;
         setIsMuted(false);
       } else {
         videoRef.current.volume = 0;
@@ -99,14 +105,21 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
       if (!document.fullscreenElement) {
         containerRef.current.requestFullscreen().then(() => {
           setIsFullscreen(true);
+          // For mobile, we should force controls to show briefly when entering fullscreen
+          setShowControls(true);
+          if (isPlaying) {
+            controlsTimeout.current = setTimeout(() => {
+              setShowControls(false);
+            }, 3000);
+          }
         }).catch(err => {
-          console.log('Error attempting to enable fullscreen:', err);
+          console.error('Error attempting to enable fullscreen:', err);
         });
       } else {
         document.exitFullscreen().then(() => {
           setIsFullscreen(false);
         }).catch(err => {
-          console.log('Error attempting to exit fullscreen:', err);
+          console.error('Error attempting to exit fullscreen:', err);
         });
       }
     }
@@ -136,6 +149,32 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, []);
+
+  // Handle touch events for mobile
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleTouchStart = () => {
+      setShowControls(true);
+      
+      if (controlsTimeout.current) {
+        clearTimeout(controlsTimeout.current);
+      }
+      
+      if (isPlaying) {
+        controlsTimeout.current = setTimeout(() => {
+          setShowControls(false);
+        }, 3000);
+      }
+    };
+
+    container.addEventListener('touchstart', handleTouchStart);
+    
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+    };
+  }, [isPlaying]);
 
   // Pre-load video metadata
   useEffect(() => {
@@ -173,13 +212,15 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
         poster="/placeholder.svg"
+        playsInline // Important for mobile
       />
       
       {/* Video controls */}
       <div 
         className={cn(
-          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300",
-          showControls ? "opacity-100" : "opacity-0"
+          "absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300",
+          showControls ? "opacity-100" : "opacity-0",
+          isMobile ? "pt-12 pb-4" : "p-4" // More touch area on mobile
         )}
       >
         <VideoProgressBar 
@@ -201,6 +242,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
           onVolumeChange={handleVolumeChange}
           onToggleMute={toggleMute}
           onFullscreen={handleFullscreen}
+          isFullscreen={isFullscreen}
+          isMobile={isMobile}
         />
       </div>
       

@@ -40,3 +40,63 @@
 .spotlight-effect.spotlight-active {
   will-change: background;
 }
+
+/* Enhanced animated gradient */
+.animated-gradient {
+  background: linear-gradient(90deg, #ea384c 0%, #ef4444 50%, #ea384c 100%);
+  background-size: 200% auto;
+  animation: background-pan 3s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Enhanced card hover effects */
+.technique-carousel-container .embla__slide {
+  transition: all 0.3s ease;
+}
+
+.technique-carousel-container .embla__slide:hover {
+  transform: translateY(-5px);
+}
+
+/* Text gradient effect */
+.text-gradient {
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Split text animation styles */
+.split-text-container {
+  display: inline-block;
+}
+
+.split-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.split-text-container.animate .split-letter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass card effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
