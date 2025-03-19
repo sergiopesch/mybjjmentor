@@ -1,0 +1,42 @@
+
+/* Effect styles */
+/* Hover effect for cards */
+.effect-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.effect-card::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(234, 56, 76, 0.15) 0%, transparent 70%);
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  z-index: -1;
+}
+
+.effect-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.effect-card:hover::before {
+  top: -50%;
+  left: -50%;
+  opacity: 1;
+}
+
+/* Spotlight effect with gradient glow */
+.spotlight-effect {
+  position: relative;
+  transition: background 0.6s ease-out;
+}
+
+.spotlight-effect.spotlight-active {
+  will-change: background;
+}
