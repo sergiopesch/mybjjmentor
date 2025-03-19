@@ -177,12 +177,7 @@
   z-index: -1;
 }
 
-/* Magnetic elements that attract to cursor */
-.magnetic {
-  display: inline-block;
-  transition: transform 0.1s cubic-bezier(0.23, 1, 0.32, 1);
-  will-change: transform;
-}
+/* Magnetic elements that attract to cursor - REMOVED */
 
 /* Split text animation */
 .char-reveal {
@@ -236,16 +231,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .mouse-track {
-    transform: none !important;
-    transition: none !important;
-  }
-  
-  .magnetic {
-    transform: none !important;
-    transition: none !important;
-  }
-  
   /* Simplify animations on mobile */
   .parallax-element {
     transform: none !important;
@@ -270,8 +255,6 @@
   .stagger-item,
   .layer-item,
   .perspective-section,
-  .magnetic,
-  .mouse-track,
   .fade-in-section,
   .slide-in-section,
   .rotate-in-section {

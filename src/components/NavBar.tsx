@@ -98,7 +98,7 @@ export const NavBar = () => {
           <Button 
             variant="outline" 
             size="sm" 
-            className="ml-4 border-theme text-theme hover:bg-theme hover:text-white"
+            className="ml-4 border-theme text-theme hover:bg-theme/10 hover:border-theme/80"
             onClick={handleAuthClick}
           >
             <User className="h-4 w-4 mr-2" />
@@ -144,7 +144,7 @@ export const NavBar = () => {
           <Button 
             variant="outline"
             onClick={handleAuthClick}
-            className="mt-4 border-theme text-theme hover:bg-theme hover:text-white"
+            className="mt-4 border-theme text-theme hover:bg-theme/10 hover:border-theme/80"
           >
             <User className="h-4 w-4 mr-2" />
             {user ? 'Sign Out' : 'Sign In'}

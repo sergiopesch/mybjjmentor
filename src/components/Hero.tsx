@@ -86,13 +86,13 @@ export const Hero = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 stagger-container">
             <Link to="/techniques" className="stagger-item">
-              <Button size="lg" className="w-full sm:w-auto group bg-theme hover:bg-theme/80 text-white mouse-track" data-sensitivity="20">
+              <Button size="lg" className="w-full sm:w-auto group bg-theme hover:bg-theme/80 text-white">
                 DISCOVER MORE
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
             <Link to="/planner" className="stagger-item">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme mouse-track" data-sensitivity="20">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme hover:bg-theme/5">
                 CREATE PLAN
               </Button>
             </Link>

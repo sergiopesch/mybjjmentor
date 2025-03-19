@@ -23,7 +23,7 @@ export const SocialButton = ({
   return (
     <Button 
       variant="outline" 
-      className="w-full"
+      className="w-full hover:bg-accent/10 hover:border-accent/50"
       onClick={onClick}
       disabled={loading}
     >
