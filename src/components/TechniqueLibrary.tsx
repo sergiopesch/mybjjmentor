@@ -7,6 +7,11 @@ import { Badge } from '@/components/ui/badge';
 import { Play, Info, BookOpen, AlignLeft } from 'lucide-react';
 import { VideoPlayer } from './VideoPlayer';
 
+// Define props interface for the component
+interface TechniqueLibraryProps {
+  searchQuery?: string;
+}
+
 // Sample technique data
 const techniques = [
   {
@@ -75,16 +80,24 @@ const techniques = [
   }
 ];
 
-export const TechniqueLibrary = () => {
+export const TechniqueLibrary = ({ searchQuery = '' }: TechniqueLibraryProps) => {
   const [selectedTechnique, setSelectedTechnique] = useState(techniques[0]);
   const [showVideo, setShowVideo] = useState(false);
 
   const categories = ['All', 'Submissions', 'Sweeps', 'Passes', 'Escapes'];
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const filteredTechniques = activeCategory === 'All' 
-    ? techniques 
-    : techniques.filter(t => t.category === activeCategory);
+  // Filter techniques by both category and search query
+  const filteredTechniques = techniques.filter(technique => {
+    const matchesCategory = activeCategory === 'All' || technique.category === activeCategory;
+    const matchesSearch = searchQuery === '' || 
+      technique.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      technique.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      technique.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      technique.level.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <section className="py-12">
@@ -166,28 +179,34 @@ export const TechniqueLibrary = () => {
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-container">
-            {filteredTechniques.map((technique, index) => (
-              <Card 
-                key={technique.id}
-                className={`cursor-pointer transition-all stagger-item ${selectedTechnique.id === technique.id ? 'border-2 border-bjj-blue' : ''}`}
-                onClick={() => {
-                  setSelectedTechnique(technique);
-                  setShowVideo(false);
-                }}
-                style={{ transitionDelay: `${index * 50}ms` }}
-              >
-                <CardHeader className="p-4">
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg">{technique.title}</CardTitle>
-                    <Badge variant="outline">{technique.level}</Badge>
-                  </div>
-                  <CardDescription className="flex items-center mt-2">
-                    <span className="mr-3">{technique.category}</span>
-                    <span>From {technique.position}</span>
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
+            {filteredTechniques.length > 0 ? (
+              filteredTechniques.map((technique, index) => (
+                <Card 
+                  key={technique.id}
+                  className={`cursor-pointer transition-all stagger-item ${selectedTechnique.id === technique.id ? 'border-2 border-bjj-blue' : ''}`}
+                  onClick={() => {
+                    setSelectedTechnique(technique);
+                    setShowVideo(false);
+                  }}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                >
+                  <CardHeader className="p-4">
+                    <div className="flex justify-between items-start">
+                      <CardTitle className="text-lg">{technique.title}</CardTitle>
+                      <Badge variant="outline">{technique.level}</Badge>
+                    </div>
+                    <CardDescription className="flex items-center mt-2">
+                      <span className="mr-3">{technique.category}</span>
+                      <span>From {technique.position}</span>
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-10">
+                <p className="text-muted-foreground">No techniques match your search criteria.</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
