@@ -111,12 +111,11 @@ export const TechniqueLibrary = () => {
             {filteredTechniques.map((technique, index) => (
               <div 
                 key={technique.id}
-                className={`glass-card p-4 cursor-pointer transition-all hover:shadow-card-hover stagger-item mouse-track ${selectedTechnique.id === technique.id ? 'ring-2 ring-bjj-blue ring-offset-2' : ''}`}
+                className={`glass-card p-4 cursor-pointer transition-all stagger-item ${selectedTechnique.id === technique.id ? 'ring-2 ring-bjj-blue ring-offset-2' : ''}`}
                 onClick={() => {
                   setSelectedTechnique(technique);
                   setShowVideo(false);
                 }}
-                data-sensitivity="20"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="flex justify-between items-start mb-2">
@@ -132,7 +131,7 @@ export const TechniqueLibrary = () => {
           </div>
 
           <div className="lg:col-span-2 perspective-section">
-            <Card className="overflow-hidden mouse-track" data-sensitivity="10">
+            <Card className="overflow-hidden">
               <div className="aspect-video bg-muted relative">
                 {showVideo ? (
                   <VideoPlayer url={selectedTechnique.videoUrl} />
