@@ -3,7 +3,7 @@ import React from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Hero } from '@/components/Hero';
 import { FeatureCard } from '@/components/FeatureCard';
-import { TechniqueLibrary } from '@/components/TechniqueLibrary';
+import { TechniqueCarousel } from '@/components/TechniqueCarousel';
 import { Video, CalendarCheck, BarChart3, Target } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -56,15 +56,7 @@ const Index = () => {
           </div>
 
           <div className="stagger-item">
-            <TechniqueLibrary />
-          </div>
-          
-          <div className="mt-12 text-center stagger-container">
-            <Link to="/techniques" className="stagger-item">
-              <Button size="lg" variant="outline" className="border-theme/50 text-theme hover:border-theme">
-                EXPLORE ALL TECHNIQUES
-              </Button>
-            </Link>
+            <TechniqueCarousel />
           </div>
         </div>
       </section>
