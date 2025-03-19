@@ -10,7 +10,7 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { VideoPlayer } from './video-player';
 import { Badge } from '@/components/ui/badge';
-import { Play, Info } from 'lucide-react';
+import { Play, Info, Clock, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 // Sample technique data with enhanced metadata
@@ -20,6 +20,8 @@ const techniques = [
     title: 'Armbar from Guard',
     level: 'Beginner',
     category: 'Submission',
+    duration: '3:45',
+    instructor: 'Master Lee',
     description: 'A fundamental submission that hyperextends the opponent\'s elbow joint when applied correctly.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
   },
@@ -28,6 +30,8 @@ const techniques = [
     title: 'Triangle Choke',
     level: 'Beginner',
     category: 'Submission',
+    duration: '4:20',
+    instructor: 'Master Chen',
     description: 'A powerful choke that uses your legs to cut off blood flow to your opponent\'s brain.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
   },
@@ -36,6 +40,8 @@ const techniques = [
     title: 'Scissor Sweep',
     level: 'Beginner',
     category: 'Sweep',
+    duration: '2:55',
+    instructor: 'Master Kim',
     description: 'An effective technique to reverse positions from guard to mount using leverage and timing.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
   },
@@ -44,6 +50,8 @@ const techniques = [
     title: 'Kimura from Guard',
     level: 'Intermediate',
     category: 'Submission',
+    duration: '5:10',
+    instructor: 'Master Garcia',
     description: 'A powerful shoulder lock that can be applied from multiple positions including guard.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
   }
@@ -68,7 +76,7 @@ export const TechniqueCarousel = () => {
           <CarouselItem key={technique.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
               <Card 
-                className="overflow-hidden border-0 shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl"
+                className="overflow-hidden border-0 shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl hover:shadow-theme/10"
                 onMouseEnter={() => setHoveredTechnique(technique.id)}
                 onMouseLeave={() => setHoveredTechnique(null)}
               >
@@ -82,7 +90,7 @@ export const TechniqueCarousel = () => {
                       <Button 
                         onClick={() => setPlayingVideo(technique.id)} 
                         size="lg" 
-                        className="relative z-10 bg-theme hover:bg-theme/80 rounded-full w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                        className="relative z-10 bg-theme hover:bg-theme/80 rounded-full w-16 h-16 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-glow shadow-theme/20"
                       >
                         <Play className="w-8 h-8 text-white ml-1" />
                       </Button>
@@ -92,7 +100,13 @@ export const TechniqueCarousel = () => {
                           <h3 className="text-xl font-bold">{technique.title}</h3>
                           <Badge className="bg-theme/80 hover:bg-theme text-white border-none">{technique.level}</Badge>
                         </div>
-                        <p className="text-sm text-white/80">{technique.category}</p>
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm text-white/80">{technique.category}</p>
+                          <div className="flex items-center text-xs text-white/70">
+                            <Clock className="h-3 w-3 mr-1" />
+                            {technique.duration}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -107,6 +121,10 @@ export const TechniqueCarousel = () => {
                 
                 {hoveredTechnique === technique.id && playingVideo !== technique.id && (
                   <CardContent className="p-4 bg-black/90">
+                    <div className="flex items-center mb-2">
+                      <Award className="h-4 w-4 text-theme mr-1" />
+                      <span className="text-xs text-theme">{technique.instructor}</span>
+                    </div>
                     <p className="text-sm text-white/80 line-clamp-2">{technique.description}</p>
                   </CardContent>
                 )}

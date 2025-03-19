@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { VideoProgressBar } from './VideoProgressBar';
 import { VideoControlBar } from './VideoControlBar';
@@ -16,6 +16,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [bufferProgress, setBufferProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -33,6 +34,13 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   const handleTimeUpdate = () => {
     if (videoRef.current) {
       setCurrentTime(videoRef.current.currentTime);
+      
+      // Update buffer progress
+      if (videoRef.current.buffered.length > 0) {
+        const bufferedEnd = videoRef.current.buffered.end(videoRef.current.buffered.length - 1);
+        const duration = videoRef.current.duration;
+        setBufferProgress((bufferedEnd / duration) * 100);
+      }
     }
   };
 
@@ -104,9 +112,24 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     }
   };
 
+  // Pre-load video metadata
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.preload = "metadata";
+    }
+    
+    return () => {
+      // Cleanup on unmount
+      if (controlsTimeout.current) {
+        clearTimeout(controlsTimeout.current);
+      }
+    };
+  }, []);
+
   return (
     <div 
-      className="relative w-full h-full bg-black"
+      className="relative w-full h-full bg-black rounded-lg overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={() => isPlaying && setShowControls(false)}
     >
@@ -120,6 +143,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
         onEnded={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
+        poster="/placeholder.svg"
       />
       
       {/* Video controls */}
@@ -133,6 +157,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
           currentTime={currentTime}
           duration={duration}
           onSeek={handleSeek}
+          bufferProgress={bufferProgress}
         />
         
         <VideoControlBar 
