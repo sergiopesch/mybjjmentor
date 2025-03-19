@@ -11,6 +11,8 @@ import Index from "./pages/Index";
 import Techniques from "./pages/Techniques";
 import Planner from "./pages/Planner";
 import Progress from "./pages/Progress";
+import Fitness from "./pages/Fitness";
+import Nutrition from "./pages/Nutrition";
 import Auth from "./pages/Auth";
 import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
@@ -28,6 +30,8 @@ const AnimatedRoutes = () => {
         <Route path="/techniques" element={<Techniques />} />
         <Route path="/planner" element={<Planner />} />
         <Route path="/progress" element={<Progress />} />
+        <Route path="/fitness" element={<Fitness />} />
+        <Route path="/nutrition" element={<Nutrition />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

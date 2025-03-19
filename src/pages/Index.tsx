@@ -4,7 +4,7 @@ import { MainLayout } from '@/layouts/MainLayout';
 import { Hero } from '@/components/Hero';
 import { FeatureCard } from '@/components/FeatureCard';
 import { TechniqueCarousel } from '@/components/TechniqueCarousel';
-import { Video, CalendarCheck, BarChart3, Target } from 'lucide-react';
+import { Video, CalendarCheck, BarChart3, Target, Dumbbell, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -22,18 +22,28 @@ const Index = () => {
             <p className="text-muted-foreground">Comprehensive tools to enhance your Jiu-Jitsu training, track progress, and achieve your goals on and off the mat.</p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 stagger-container">
-            <div className="stagger-item">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6 stagger-container">
+            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
               <FeatureCard title="Technique Library" description="Access a comprehensive collection of JJ techniques with detailed step-by-step instructions." icon={Video} />
             </div>
-            <div className="stagger-item">
+            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
               <FeatureCard title="Training Planner" description="Create personalized training plans based on your skill level and specific goals." icon={CalendarCheck} />
             </div>
-            <div className="stagger-item">
+            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
               <FeatureCard title="Progress Tracking" description="Monitor your journey, track your skill development, and visualize your growth." icon={BarChart3} />
             </div>
-            <div className="stagger-item">
+            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
               <FeatureCard title="Goal Setting" description="Set specific, measurable goals and get guidance on how to achieve them." icon={Target} />
+            </div>
+            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
+              <Link to="/fitness" className="block h-full">
+                <FeatureCard title="Fitness" description="Track and improve your fitness to enhance your jiu-jitsu performance." icon={Dumbbell} />
+              </Link>
+            </div>
+            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
+              <Link to="/nutrition" className="block h-full">
+                <FeatureCard title="Nutrition" description="Optimize your nutrition to fuel your training and recovery." icon={Utensils} />
+              </Link>
             </div>
           </div>
         </div>

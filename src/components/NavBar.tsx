@@ -40,6 +40,8 @@ export const NavBar = () => {
     { name: 'TECHNIQUES', path: '/techniques' },
     { name: 'TRAINING PLANNER', path: '/planner' },
     { name: 'PROGRESS', path: '/progress' },
+    { name: 'FITNESS', path: '/fitness' },
+    { name: 'NUTRITION', path: '/nutrition' },
   ];
 
   const isActive = (path: string) => {
@@ -85,13 +87,13 @@ export const NavBar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map(link => (
             <Link
               key={link.path}
               to={link.path}
               className={cn(
-                'text-sm font-medium tracking-wide transition-all hover:text-theme uppercase',
+                'text-xs font-medium tracking-wide transition-all hover:text-theme uppercase',
                 isActive(link.path)
                   ? 'text-theme'
                   : 'text-muted-foreground'
@@ -135,7 +137,7 @@ export const NavBar = () => {
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
         )}
       >
-        <nav className="flex flex-col items-center space-y-8 p-8">
+        <nav className="flex flex-col items-center space-y-6 p-8">
           {navLinks.map(link => (
             <Link
               key={link.path}
