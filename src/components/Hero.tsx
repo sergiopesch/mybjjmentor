@@ -49,8 +49,8 @@ export const Hero = () => {
       {/* Content */}
       <div className="container max-w-6xl px-4 mx-auto relative">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* More responsive heading with better text wrapping */}
-          <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 uppercase leading-tight">
+          {/* Improved responsive heading with better text wrapping */}
+          <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 uppercase leading-tight hyphens-auto px-2 break-words">
             A FRAMEWORK TO MASTERY
           </h1>
           

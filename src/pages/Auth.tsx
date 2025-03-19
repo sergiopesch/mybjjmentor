@@ -44,17 +44,20 @@ const Auth = () => {
   return (
     <MainLayout>
       <section className="pt-40 pb-20 relative overflow-hidden">
-        {/* Animated background elements */}
+        {/* Enhanced animated background elements matching the site style */}
         <div 
-          className="absolute -top-20 -right-20 w-64 h-64 bg-theme/10 rounded-full filter blur-3xl opacity-40 parallax-element"
+          className="absolute -top-20 -right-20 w-64 h-64 bg-theme/20 rounded-full filter blur-3xl opacity-50 parallax-element"
           data-parallax-direction="up"
           data-parallax-speed="10"
         ></div>
         <div 
-          className="absolute -bottom-20 -left-20 w-80 h-80 bg-theme/10 rounded-full filter blur-3xl opacity-30 parallax-element"
+          className="absolute -bottom-20 -left-20 w-80 h-80 bg-theme/20 rounded-full filter blur-3xl opacity-40 parallax-element"
           data-parallax-direction="down"
           data-parallax-speed="7"
         ></div>
+        
+        {/* Subtle gradient line matching the Hero section */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-theme/40 to-transparent opacity-60"></div>
         
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-md mx-auto">
@@ -65,8 +68,10 @@ const Auth = () => {
               Sign in to track your progress, save favorite techniques, and customize your BJJ training plan.
             </p>
             
-            <div className="perspective-section">
-              <AuthForm />
+            <div className="perspective-section stagger-container">
+              <div className="stagger-item glass-card p-1">
+                <AuthForm />
+              </div>
             </div>
           </div>
         </div>
