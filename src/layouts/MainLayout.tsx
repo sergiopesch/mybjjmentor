@@ -4,6 +4,7 @@ import { NavBar } from '@/components/NavBar';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { setupScrollAnimations } from '@/lib/animations';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-theme-dark text-theme-light overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-theme-dark text-theme-light dark:bg-black dark:text-white overflow-x-hidden">
       <NavBar />
       <main className="flex-grow relative page-transition-wrapper">
         {/* Animated background with parallax effect */}
@@ -38,11 +39,14 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
           {children}
         </div>
       </main>
-      <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10">
-        <div className="container max-w-6xl px-4 mx-auto text-center">
+      <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10 relative">
+        <div className="container max-w-6xl px-4 mx-auto text-center flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} <span className="text-theme">Master</span>. All rights reserved.
           </p>
+          <div className="mt-4 sm:mt-0">
+            <ThemeToggle />
+          </div>
         </div>
       </footer>
     </div>

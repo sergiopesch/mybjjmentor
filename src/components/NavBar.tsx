@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Menu, X, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/providers/AuthProvider';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +64,7 @@ export const NavBar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled 
-          ? 'bg-black/70 backdrop-blur-lg border-b border-white/10 py-3' 
+          ? 'bg-black/70 backdrop-blur-lg border-b border-white/10 py-3 dark:bg-black/80 light:bg-white/80 light:border-black/10' 
           : 'bg-transparent py-5'
       )}
     >
@@ -101,35 +102,41 @@ export const NavBar = () => {
             </Link>
           ))}
           
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="ml-4 border-theme text-theme hover:bg-theme/10 hover:border-theme/80"
-            onClick={handleAuthClick}
-          >
-            <User className="h-4 w-4 mr-2" />
-            {user ? 'Sign Out' : 'Sign In'}
-          </Button>
+          <div className="flex items-center space-x-2">
+            <ThemeToggle />
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="ml-2 border-theme/50 text-theme hover:bg-theme/10 hover:border-theme/80"
+              onClick={handleAuthClick}
+            >
+              <User className="h-4 w-4 mr-2" />
+              {user ? 'Sign Out' : 'Sign In'}
+            </Button>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 focus:outline-none text-theme"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </button>
+        <div className="md:hidden flex items-center space-x-2">
+          <ThemeToggle />
+          <button
+            className="p-2 focus:outline-none text-theme"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40',
+          'fixed inset-0 bg-black/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40 dark:bg-black/95 light:bg-white/95',
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
         )}
       >
@@ -150,7 +157,7 @@ export const NavBar = () => {
           <Button 
             variant="outline"
             onClick={handleAuthClick}
-            className="mt-4 border-theme text-theme hover:bg-theme/10 hover:border-theme/80"
+            className="mt-4 border-theme/50 text-theme hover:bg-theme/10 hover:border-theme/80"
           >
             <User className="h-4 w-4 mr-2" />
             {user ? 'Sign Out' : 'Sign In'}
