@@ -17,10 +17,10 @@ const Index = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="mb-16 text-center max-w-3xl mx-auto perspective-section">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
-              Your Personal BJJ Guide
+              Your Personal JJ Guide
             </h2>
             <p className="text-muted-foreground">
-              Comprehensive tools to enhance your Brazilian Jiu-Jitsu training,
+              Comprehensive tools to enhance your Jiu-Jitsu training,
               track progress, and achieve your goals on the mat.
             </p>
           </div>
@@ -29,7 +29,7 @@ const Index = () => {
             <div className="stagger-item">
               <FeatureCard
                 title="Technique Library"
-                description="Access a comprehensive collection of BJJ techniques with detailed step-by-step instructions."
+                description="Access a comprehensive collection of JJ techniques with detailed step-by-step instructions."
                 icon={Video}
               />
             </div>
@@ -88,8 +88,7 @@ const Index = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-theme/50 text-theme hover:border-theme mouse-track"
-                data-sensitivity="15"
+                className="border-theme/50 text-theme hover:border-theme"
               >
                 EXPLORE ALL TECHNIQUES
               </Button>
@@ -102,18 +101,17 @@ const Index = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto text-center perspective-section">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 uppercase">
-              Start Your BJJ Journey
+              Start Your JJ Journey
             </h2>
             <p className="text-muted-foreground mb-10">
               Whether you're just beginning or looking to refine your skills, 
-              our comprehensive tools will help you progress and excel in Brazilian Jiu-Jitsu.
+              our comprehensive tools will help you progress and excel in Jiu-Jitsu.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 stagger-container">
               <Link to="/planner" className="stagger-item">
                 <Button 
                   size="lg" 
-                  className="w-full sm:w-auto bg-theme hover:bg-theme/80 text-white mouse-track"
-                  data-sensitivity="20"
+                  className="w-full sm:w-auto bg-theme hover:bg-theme/80 text-white"
                 >
                   CREATE TRAINING PLAN
                 </Button>
@@ -122,8 +120,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme mouse-track"
-                  data-sensitivity="20"
+                  className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme"
                 >
                   TRACK YOUR PROGRESS
                 </Button>
