@@ -27,11 +27,14 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
     <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
       <NavBar />
       <main className="flex-grow relative page-transition-wrapper">
-        {/* Animated background with parallax effect */}
-        <div className="absolute inset-0 bg-dark-clouds bg-cover bg-center bg-no-repeat opacity-50 pointer-events-none -z-10 parallax-bg"></div>
+        {/* Animated background with parallax effect - adjusted opacity for better contrast */}
+        <div className="absolute inset-0 bg-dark-clouds bg-cover bg-center bg-no-repeat opacity-30 pointer-events-none -z-10 parallax-bg"></div>
         
-        {/* Particle overlay effect */}
-        <div className="absolute inset-0 particle-overlay pointer-events-none -z-5"></div>
+        {/* Subtle gradient overlay to enhance text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background/80 pointer-events-none -z-9"></div>
+        
+        {/* Particle overlay effect - more subtle */}
+        <div className="absolute inset-0 particle-overlay opacity-30 pointer-events-none -z-8"></div>
         
         {/* Animated content wrapper with route transition */}
         <div key={location.pathname} className="animate-page-transition">
