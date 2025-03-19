@@ -1,16 +1,16 @@
 
-# Master BJJ - Your Complete Brazilian Jiu-Jitsu Training Framework
+# Master JJ - Your Complete Jiu-Jitsu Training Framework
 
-## About Master BJJ
+## About Master JJ
 
-Master BJJ is a comprehensive Brazilian Jiu-Jitsu training platform designed to help practitioners of all levels improve their skills, track progress, and achieve their goals on the mat. Whether you're a beginner just starting your BJJ journey or an experienced practitioner looking to refine specific techniques, Master BJJ provides the tools and resources you need.
+Master JJ is a comprehensive Jiu-Jitsu training platform designed to help practitioners of all levels improve their skills, track progress, and achieve their goals on the mat. Whether you're a beginner just starting your JJ journey or an experienced practitioner looking to refine specific techniques, Master JJ provides the tools and resources you need.
 
 ### Key Features
 
-- **Technique Library**: Access a vast collection of BJJ techniques with detailed step-by-step instructions and video demonstrations.
+- **Technique Library**: Access a vast collection of Jiu-Jitsu techniques with detailed step-by-step instructions and video demonstrations.
 - **Training Planner**: Create personalized training plans based on your skill level and specific goals.
 - **Progress Tracking**: Monitor your journey, track your skill development, and visualize your growth over time.
-- **Goal Setting**: Set specific, measurable BJJ goals and get guidance on how to achieve them effectively.
+- **Goal Setting**: Set specific, measurable Jiu-Jitsu goals and get guidance on how to achieve them effectively.
 
 ## Project info
 

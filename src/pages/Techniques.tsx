@@ -14,10 +14,10 @@ const Techniques = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto mb-12">
             <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">
-              BJJ Technique Library
+              Jiu-Jitsu Technique Library
             </h1>
             <p className="text-muted-foreground text-center mb-8">
-              Explore our comprehensive collection of Brazilian Jiu-Jitsu techniques,
+              Explore our comprehensive collection of Jiu-Jitsu techniques,
               from fundamental movements to advanced submissions.
             </p>
             

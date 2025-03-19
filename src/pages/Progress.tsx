@@ -12,10 +12,10 @@ const Progress = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto mb-12">
             <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">
-              BJJ Progress Tracking
+              Jiu-Jitsu Progress Tracking
             </h1>
             <p className="text-muted-foreground text-center mb-8">
-              Monitor your Brazilian Jiu-Jitsu journey, track your skill development,
+              Monitor your Jiu-Jitsu journey, track your skill development,
               and visualize your growth on the mat.
             </p>
           </div>

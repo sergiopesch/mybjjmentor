@@ -87,7 +87,7 @@ export const ProgressTracker = () => {
         <div className="mb-8">
           <h2 className="text-3xl font-bold tracking-tight mb-4">Progress Tracking</h2>
           <p className="text-muted-foreground">
-            Monitor your BJJ journey, track your skills, and set goals.
+            Monitor your JJ journey, track your skills, and set goals.
           </p>
         </div>
 

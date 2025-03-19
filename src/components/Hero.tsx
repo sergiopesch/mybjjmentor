@@ -60,7 +60,7 @@ export const Hero = () => {
       <div className="container max-w-6xl px-4 mx-auto relative">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 uppercase">
-            BJJ Framework To Take You Anywhere
+            JJ Framework To Take You Anywhere
           </h1>
           
           <p className="text-sm md:text-base uppercase tracking-widest text-muted-foreground mb-12 perspective-section">
