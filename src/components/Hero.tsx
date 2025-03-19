@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -11,25 +10,51 @@ export const Hero = () => {
   useEffect(() => {
     if (!titleRef.current) return;
     const titleElement = titleRef.current;
-    const text = titleElement.innerText;
-
-    // Clear the element
-    titleElement.innerText = '';
-
-    // Set up for split text animation
+    
+    // Clear previous animation setup if any
+    if (titleElement.querySelector('.split-text-container')) {
+      return; // Animation already set up
+    }
+    
+    // Get the text content without modifying the structure
     const container = document.createElement('span');
     container.className = 'split-text-container';
-
-    // Create individual spans for each letter
-    [...text].forEach((letter, i) => {
-      const span = document.createElement('span');
-      span.className = 'split-letter';
-      span.innerText = letter === ' ' ? '\u00A0' : letter; // Use non-breaking space for actual spaces
-      span.style.transitionDelay = `${i * 30}ms`;
-      container.appendChild(span);
-    });
+    
+    // Create spans for "A FRAMEWORK TO" (white text)
+    const frameworkSpan = document.createElement('span');
+    frameworkSpan.className = 'text-white';
+    frameworkSpan.innerText = "A FRAMEWORK TO ";
+    
+    // Create spans for "MASTERY" (theme text)
+    const masterySpan = document.createElement('span');
+    masterySpan.className = 'text-theme';
+    masterySpan.innerText = "MASTERY";
+    
+    // Add them to container
+    container.appendChild(frameworkSpan);
+    container.appendChild(masterySpan);
+    
+    // Apply animation to the letters
+    const applyLetterAnimation = (parentSpan) => {
+      const text = parentSpan.innerText;
+      parentSpan.innerText = '';
+      
+      [...text].forEach((letter, i) => {
+        const letterSpan = document.createElement('span');
+        letterSpan.className = 'split-letter';
+        letterSpan.innerText = letter === ' ' ? '\u00A0' : letter;
+        letterSpan.style.transitionDelay = `${i * 30}ms`;
+        parentSpan.appendChild(letterSpan);
+      });
+    };
+    
+    applyLetterAnimation(frameworkSpan);
+    applyLetterAnimation(masterySpan);
+    
+    // Clear the element and add the container
+    titleElement.innerHTML = '';
     titleElement.appendChild(container);
-
+    
     // Trigger animation after a short delay
     setTimeout(() => {
       container.classList.add('animate');
