@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -98,8 +99,12 @@
   }
 
   body {
-    @apply bg-theme-dark text-theme-light font-sans antialiased dark:bg-black/95 dark:text-white light:bg-white light:text-gray-900;
+    @apply bg-theme-dark text-theme-light font-sans antialiased dark:bg-black/95 dark:text-white;
     font-family: 'Inter', sans-serif;
+  }
+
+  .light body {
+    @apply bg-white text-gray-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
