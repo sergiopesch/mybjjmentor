@@ -1,26 +1,23 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 export const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
-  
+
   // Create split text animation
   useEffect(() => {
     if (!titleRef.current) return;
-    
     const titleElement = titleRef.current;
     const text = titleElement.innerText;
-    
+
     // Clear the element
     titleElement.innerText = '';
-    
+
     // Set up for split text animation
     const container = document.createElement('span');
     container.className = 'split-text-container';
-    
+
     // Create individual spans for each letter
     [...text].forEach((letter, i) => {
       const span = document.createElement('span');
@@ -29,39 +26,26 @@ export const Hero = () => {
       span.style.transitionDelay = `${i * 30}ms`;
       container.appendChild(span);
     });
-    
     titleElement.appendChild(container);
-    
+
     // Trigger animation after a short delay
     setTimeout(() => {
       container.classList.add('animate');
     }, 200);
   }, []);
-  
-  return (
-    <section className="relative pt-40 pb-32 overflow-hidden">
+  return <section className="relative pt-40 pb-32 overflow-hidden">
       {/* Dark background with mountains/clouds from bottom */}
       <div className="absolute inset-0 -z-20 bg-theme-dark"></div>
       
       {/* Parallax elements */}
-      <div 
-        className="absolute top-[20%] right-[10%] w-64 h-64 bg-theme/10 rounded-full filter blur-3xl opacity-40 parallax-element"
-        data-parallax-direction="up"
-        data-parallax-speed="15"
-      ></div>
+      <div className="absolute top-[20%] right-[10%] w-64 h-64 bg-theme/10 rounded-full filter blur-3xl opacity-40 parallax-element" data-parallax-direction="up" data-parallax-speed="15"></div>
       
-      <div 
-        className="absolute bottom-[10%] left-[15%] w-80 h-80 bg-theme/10 rounded-full filter blur-3xl opacity-30 parallax-element"
-        data-parallax-direction="down"
-        data-parallax-speed="10"
-      ></div>
+      <div className="absolute bottom-[10%] left-[15%] w-80 h-80 bg-theme/10 rounded-full filter blur-3xl opacity-30 parallax-element" data-parallax-direction="down" data-parallax-speed="10"></div>
       
       {/* Content */}
       <div className="container max-w-6xl px-4 mx-auto relative">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 uppercase">
-            JJ Framework To Take You Anywhere
-          </h1>
+          <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 uppercase">A FRAMEWORK TO MASTERY</h1>
           
           <p className="text-sm md:text-base uppercase tracking-widest text-muted-foreground mb-12 perspective-section">
             Support your growth every step of the way
@@ -99,6 +83,5 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
