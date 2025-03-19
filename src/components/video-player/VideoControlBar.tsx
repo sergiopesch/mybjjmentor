@@ -10,6 +10,8 @@ interface VideoControlBarProps {
   duration: number;
   volume: number;
   isMuted: boolean;
+  isFullscreen?: boolean;  // Added this missing property
+  isMobile?: boolean;      // Added this missing property
   onTogglePlay: () => void;
   onSkipBackward: () => void;
   onSkipForward: () => void;
@@ -24,6 +26,8 @@ export const VideoControlBar: React.FC<VideoControlBarProps> = ({
   duration,
   volume,
   isMuted,
+  isFullscreen,
+  isMobile,
   onTogglePlay,
   onSkipBackward,
   onSkipForward,
