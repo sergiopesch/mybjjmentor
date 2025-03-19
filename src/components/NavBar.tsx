@@ -72,8 +72,14 @@ export const NavBar = () => {
           to="/" 
           className="text-xl font-bold tracking-tight transition-opacity hover:opacity-80 flex items-center"
         >
-          <div className="h-8 w-8 rounded-full bg-theme mr-2 flex items-center justify-center">
-            <div className="h-3 w-3 rounded-full bg-theme-dark"></div>
+          {/* Updated belt-inspired logo */}
+          <div className="relative h-8 w-10 mr-2 flex items-center justify-center">
+            {/* Black belt with red bar */}
+            <div className="absolute h-3 w-full bg-black rounded-sm"></div>
+            <div className="absolute h-3 w-6 bg-theme rounded-sm left-1/2 transform -translate-x-1/2"></div>
+            {/* White trim on edges */}
+            <div className="absolute h-3 w-1 bg-white rounded-sm left-0"></div>
+            <div className="absolute h-3 w-1 bg-white rounded-sm right-0"></div>
           </div>
           <span className="text-theme">Master</span>
         </Link>
