@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 import { Menu, X, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/providers/AuthProvider';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,23 +101,19 @@ export const NavBar = () => {
             </Link>
           ))}
           
-          <div className="flex items-center space-x-2">
-            <ThemeToggle />
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="ml-2 border-primary/20 hover:border-primary/50"
-              onClick={handleAuthClick}
-            >
-              <User className="h-4 w-4 mr-2" />
-              {user ? 'Sign Out' : 'Sign In'}
-            </Button>
-          </div>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="ml-2 border-primary/20 hover:border-primary/50"
+            onClick={handleAuthClick}
+          >
+            <User className="h-4 w-4 mr-2" />
+            {user ? 'Sign Out' : 'Sign In'}
+          </Button>
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center space-x-2">
-          <ThemeToggle />
+        <div className="md:hidden flex items-center">
           <button
             className="p-2 focus:outline-none text-foreground"
             onClick={() => setIsOpen(!isOpen)}
