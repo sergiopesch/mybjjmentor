@@ -6,6 +6,7 @@ import { TechniqueCarousel } from '@/components/TechniqueCarousel';
 import { Video, Calendar, BarChart3, Target, Dumbbell, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+
 const Index = () => {
   return <MainLayout>
       <Hero />
@@ -54,7 +55,7 @@ const Index = () => {
         </div>
       </section>
       
-      <section className="py-16 md:py-20 bg-black/30 backdrop-blur-sm relative">
+      <section className="py-16 md:py-24 bg-black/30 backdrop-blur-sm relative overflow-hidden">
         <div className="absolute -right-20 top-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="left" data-parallax-speed="5"></div>
         
         <div className="absolute -left-20 bottom-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="right" data-parallax-speed="7"></div>
@@ -62,14 +63,26 @@ const Index = () => {
         <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-theme/30 to-transparent opacity-50"></div>
         
         <div className="container max-w-6xl px-4 mx-auto">
-          <div className="text-center mb-12 perspective-section">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase">
+          <div className="text-center mb-12 md:mb-16 perspective-section">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase mb-4">
               <span className="text-white">FEATURED</span> <span className="text-theme">TECHNIQUES</span>
             </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Master these essential techniques to elevate your game. Each video provides detailed instruction 
+              from experienced practitioners.
+            </p>
           </div>
 
           <div className="stagger-item">
             <TechniqueCarousel />
+          </div>
+          
+          <div className="flex justify-center mt-10">
+            <Link to="/techniques">
+              <Button variant="outline" className="border-theme/50 text-theme hover:border-theme">
+                VIEW ALL TECHNIQUES
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -101,4 +114,5 @@ const Index = () => {
       </section>
     </MainLayout>;
 };
+
 export default Index;
