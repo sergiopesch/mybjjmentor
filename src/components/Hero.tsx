@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -6,7 +7,7 @@ import { Link } from 'react-router-dom';
 export const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
-  // Create split text animation
+  // Create split text animation with improved timing and effects
   useEffect(() => {
     if (!titleRef.current) return;
     const titleElement = titleRef.current;
@@ -34,8 +35,8 @@ export const Hero = () => {
     container.appendChild(frameworkSpan);
     container.appendChild(masterySpan);
     
-    // Apply animation to the letters
-    const applyLetterAnimation = (parentSpan) => {
+    // Apply animation to the letters with staggered timing
+    const applyLetterAnimation = (parentSpan, baseDelay = 0) => {
       const text = parentSpan.innerText;
       parentSpan.innerText = '';
       
@@ -43,13 +44,16 @@ export const Hero = () => {
         const letterSpan = document.createElement('span');
         letterSpan.className = 'split-letter';
         letterSpan.innerText = letter === ' ' ? '\u00A0' : letter;
-        letterSpan.style.transitionDelay = `${i * 30}ms`;
+        letterSpan.style.transitionDelay = `${baseDelay + (i * 25)}ms`;
         parentSpan.appendChild(letterSpan);
       });
+      
+      return text.length;
     };
     
-    applyLetterAnimation(frameworkSpan);
-    applyLetterAnimation(masterySpan);
+    // Apply with cascading delays
+    const frameworkLength = applyLetterAnimation(frameworkSpan, 0);
+    applyLetterAnimation(masterySpan, frameworkLength * 25); // Cascade the mastery text after framework
     
     // Clear the element and add the container
     titleElement.innerHTML = '';
@@ -66,7 +70,7 @@ export const Hero = () => {
       {/* Dark background with mountains/clouds from bottom */}
       <div className="absolute inset-0 -z-20 bg-theme-dark"></div>
       
-      {/* Parallax elements - adjusted for better visual balance */}
+      {/* Enhanced parallax elements with better visual balance */}
       <div className="absolute top-[20%] right-[10%] w-48 h-48 md:w-64 md:h-64 bg-theme/10 rounded-full filter blur-3xl opacity-40 parallax-element" data-parallax-direction="up" data-parallax-speed="15"></div>
       
       <div className="absolute bottom-[10%] left-[15%] w-56 h-56 md:w-80 md:h-80 bg-theme/10 rounded-full filter blur-3xl opacity-30 parallax-element" data-parallax-direction="down" data-parallax-speed="10"></div>
@@ -83,17 +87,17 @@ export const Hero = () => {
             SUPPORT YOUR GROWTH EVERY STEP OF THE WAY — NO MATTER WHERE YOU ARE
           </p>
           
-          {/* Stats Section */}
+          {/* Stats Section with improved visual effects */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12 relative z-10 stagger-container">
-            {/* Toned down vertical beam for better design integration */}
+            {/* Enhanced vertical beam for better design integration */}
             <div className="absolute inset-0 opacity-50" style={{ background: "linear-gradient(to bottom, transparent, rgba(234, 56, 76, 0.3), transparent)" }}></div>
             
-            <div className="text-center p-4 md:p-8 stagger-item bg-black/20 backdrop-blur-sm rounded-lg">
+            <div className="text-center p-4 md:p-8 stagger-item bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 transition-all hover:transform hover:scale-105 duration-300">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-theme mb-2">50+</h2>
               <p className="text-sm uppercase tracking-widest text-muted-foreground">Techniques</p>
             </div>
             
-            <div className="text-center p-4 md:p-8 stagger-item bg-black/20 backdrop-blur-sm rounded-lg">
+            <div className="text-center p-4 md:p-8 stagger-item bg-black/20 backdrop-blur-sm rounded-lg hover:bg-black/30 transition-all hover:transform hover:scale-105 duration-300">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-theme mb-2">10X</h2>
               <p className="text-sm uppercase tracking-widest text-muted-foreground">Faster Progress</p>
             </div>
