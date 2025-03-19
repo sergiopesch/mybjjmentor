@@ -14,7 +14,7 @@ import Nutrition from "./pages/Nutrition";
 import Auth from "./pages/Auth";
 import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
-import TrainingPlanner from "./pages/TrainingPlanner";
+import TrainingPlannerPage from "./pages/TrainingPlanner";
 import Progress from "./pages/Progress";
 
 const queryClient = new QueryClient();
@@ -28,7 +28,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/techniques" element={<Techniques />} />
-        <Route path="/techniques/planner" element={<TrainingPlanner />} />
+        <Route path="/techniques/planner" element={<TrainingPlannerPage />} />
         <Route path="/techniques/progress" element={<Progress />} />
         <Route path="/fitness" element={<Fitness />} />
         <Route path="/nutrition" element={<Nutrition />} />

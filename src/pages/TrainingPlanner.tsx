@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
-import { TrainingCalendar } from '@/components/TrainingCalendar';
+import { TrainingPlanner } from '@/components/TrainingPlanner';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
-const TrainingPlanner = () => {
+const TrainingPlannerPage = () => {
   return (
     <MainLayout>
       <section className="pt-32 pb-12 relative overflow-hidden">
@@ -32,11 +32,11 @@ const TrainingPlanner = () => {
             </p>
           </div>
           
-          <TrainingCalendar />
+          <TrainingPlanner />
         </div>
       </section>
     </MainLayout>
   );
 };
 
-export default TrainingPlanner;
+export default TrainingPlannerPage;
