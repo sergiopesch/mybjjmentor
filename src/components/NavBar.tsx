@@ -38,8 +38,6 @@ export const NavBar = () => {
   const navLinks = [
     { name: 'HOME', path: '/' },
     { name: 'TECHNIQUES', path: '/techniques' },
-    { name: 'TRAINING PLANNER', path: '/planner' },
-    { name: 'PROGRESS', path: '/progress' },
     { name: 'FITNESS', path: '/fitness' },
     { name: 'NUTRITION', path: '/nutrition' },
   ];

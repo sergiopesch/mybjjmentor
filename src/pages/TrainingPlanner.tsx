@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
-import { ProgressTracker } from '@/components/ProgressTracker';
+import { TrainingCalendar } from '@/components/TrainingCalendar';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
-const Progress = () => {
+const TrainingPlanner = () => {
   return (
     <MainLayout>
       <section className="pt-32 pb-12 relative overflow-hidden">
@@ -22,21 +22,21 @@ const Progress = () => {
             </Link>
           </div>
           
-          <div className="max-w-3xl mx-auto mb-12">
+          <div className="max-w-3xl mx-auto mb-8">
             <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">
-              <span className="text-white">Progress</span> <span className="text-theme">Tracking</span>
+              <span className="text-white">Training</span> <span className="text-theme">Planner</span>
             </h1>
             <p className="text-muted-foreground text-center mb-8">
-              Monitor your Jiu-Jitsu journey, track your skill development,
-              and visualize your growth on the mat.
+              Plan your Jiu-Jitsu training sessions, track your progress, 
+              and optimize your JJ journey with our intelligent calendar system.
             </p>
           </div>
           
-          <ProgressTracker />
+          <TrainingCalendar />
         </div>
       </section>
     </MainLayout>
   );
 };
 
-export default Progress;
+export default TrainingPlanner;

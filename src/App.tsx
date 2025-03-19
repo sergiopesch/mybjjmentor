@@ -9,13 +9,13 @@ import { AnimatePresence } from "@/components/AnimatePresence";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Techniques from "./pages/Techniques";
-import Planner from "./pages/Planner";
-import Progress from "./pages/Progress";
 import Fitness from "./pages/Fitness";
 import Nutrition from "./pages/Nutrition";
 import Auth from "./pages/Auth";
 import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
+import TrainingPlanner from "./pages/TrainingPlanner";
+import Progress from "./pages/Progress";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +28,8 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/techniques" element={<Techniques />} />
-        <Route path="/planner" element={<Planner />} />
-        <Route path="/progress" element={<Progress />} />
+        <Route path="/techniques/planner" element={<TrainingPlanner />} />
+        <Route path="/techniques/progress" element={<Progress />} />
         <Route path="/fitness" element={<Fitness />} />
         <Route path="/nutrition" element={<Nutrition />} />
         <Route path="/auth" element={<Auth />} />
