@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -99,12 +98,8 @@
   }
 
   body {
-    @apply bg-theme-dark text-theme-light font-sans antialiased dark:bg-black/95 dark:text-white;
+    @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
-  }
-
-  .light body {
-    @apply bg-white text-gray-900;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -115,7 +110,11 @@
 /* Custom utility classes */
 @layer components {
   .glass-card {
-    @apply bg-black/30 backdrop-blur-lg border border-white/10 shadow-glass rounded-xl;
+    @apply bg-black/30 backdrop-blur-lg border border-white/10 shadow-glass rounded-xl dark:bg-black/30 dark:border-white/10;
+  }
+  
+  .light .glass-card {
+    @apply bg-white/70 backdrop-blur-lg border border-black/10 shadow-glass;
   }
   
   .page-container {
@@ -253,19 +252,16 @@
   }
 }
 
-/* Dark/Light mode transitions */
-.dark body, .light body {
+/* Theme transitions */
+.dark,
+.light {
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* Dark mode specific styles */
-.dark .glass-card {
-  @apply bg-black/30 backdrop-blur-lg border border-white/10 shadow-glass;
-}
-
-/* Light mode specific styles */
-.light .glass-card {
-  @apply bg-white/70 backdrop-blur-lg border border-black/10 shadow-glass;
+/* Particle overlay effect */
+.particle-overlay {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
 .light .particle-overlay {

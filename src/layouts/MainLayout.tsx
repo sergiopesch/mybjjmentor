@@ -25,7 +25,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-theme-dark text-theme-light dark:bg-black dark:text-white overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
       <NavBar />
       <main className="flex-grow relative page-transition-wrapper">
         {/* Animated background with parallax effect */}
@@ -39,7 +39,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
           {children}
         </div>
       </main>
-      <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10 relative">
+      <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10 dark:border-white/10 light:border-black/10 relative">
         <div className="container max-w-6xl px-4 mx-auto text-center flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} <span className="text-theme">Master</span>. All rights reserved.

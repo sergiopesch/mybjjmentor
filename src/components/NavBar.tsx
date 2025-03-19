@@ -64,7 +64,7 @@ export const NavBar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled 
-          ? 'bg-black/70 backdrop-blur-lg border-b border-white/10 py-3 dark:bg-black/80 light:bg-white/80 light:border-black/10' 
+          ? 'bg-background/70 backdrop-blur-lg border-b border-border py-3' 
           : 'bg-transparent py-5'
       )}
     >
@@ -73,7 +73,7 @@ export const NavBar = () => {
           to="/" 
           className="text-xl font-bold tracking-tight transition-opacity hover:opacity-80 flex items-center"
         >
-          {/* Updated belt-inspired logo */}
+          {/* Belt-inspired logo */}
           <div className="relative h-8 w-10 mr-2 flex items-center justify-center">
             {/* Black belt with red bar */}
             <div className="absolute h-3 w-full bg-black rounded-sm"></div>
@@ -107,7 +107,7 @@ export const NavBar = () => {
             <Button 
               variant="outline" 
               size="sm" 
-              className="ml-2 border-theme/50 text-theme hover:bg-theme/10 hover:border-theme/80"
+              className="ml-2 border-primary/20 hover:border-primary/50"
               onClick={handleAuthClick}
             >
               <User className="h-4 w-4 mr-2" />
@@ -120,7 +120,7 @@ export const NavBar = () => {
         <div className="md:hidden flex items-center space-x-2">
           <ThemeToggle />
           <button
-            className="p-2 focus:outline-none text-theme"
+            className="p-2 focus:outline-none text-foreground"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -136,7 +136,7 @@ export const NavBar = () => {
       {/* Mobile Navigation */}
       <div
         className={cn(
-          'fixed inset-0 bg-black/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40 dark:bg-black/95 light:bg-white/95',
+          'fixed inset-0 bg-background/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40',
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
         )}
       >
@@ -157,7 +157,7 @@ export const NavBar = () => {
           <Button 
             variant="outline"
             onClick={handleAuthClick}
-            className="mt-4 border-theme/50 text-theme hover:bg-theme/10 hover:border-theme/80"
+            className="mt-4 border-primary/20 hover:border-primary/50"
           >
             <User className="h-4 w-4 mr-2" />
             {user ? 'Sign Out' : 'Sign In'}

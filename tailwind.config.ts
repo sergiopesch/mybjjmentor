@@ -70,9 +70,9 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Updated theme colors from orange to red
+				// Theme colors
 				theme: {
-					DEFAULT: '#ea384c', // Red accent color (was orange #f97316)
+					DEFAULT: '#ea384c', // Red accent color
 					dark: '#171717',    // Dark background
 					light: '#ffffff',   // Light text color
 					muted: '#a1a1aa',   // Muted text
