@@ -40,7 +40,7 @@ const Nutrition = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto perspective-section">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 uppercase">
-              Jiu-Jitsu <span className="text-theme animated-gradient">Nutrition</span>
+              <span className="text-white">JIU-JITSU</span> <span className="text-theme">NUTRITION</span>
             </h1>
             <p className="text-muted-foreground">Track and optimize your nutrition to fuel your jiu-jitsu performance and recovery.</p>
           </div>

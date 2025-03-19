@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -49,16 +48,16 @@ export const Hero = () => {
       {/* Content */}
       <div className="container max-w-6xl px-4 mx-auto relative">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* Improved responsive heading with better text wrapping */}
+          {/* Updated heading format with white/red text */}
           <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 uppercase leading-tight hyphens-auto px-2 break-words">
-            A FRAMEWORK TO MASTERY
+            <span className="text-white">A FRAMEWORK TO</span> <span className="text-theme">MASTERY</span>
           </h1>
           
           <p className="text-xs sm:text-sm md:text-base uppercase tracking-widest text-muted-foreground mb-8 md:mb-12 perspective-section max-w-2xl mx-auto">
             SUPPORT YOUR GROWTH EVERY STEP OF THE WAY — NO MATTER WHERE YOU ARE
           </p>
           
-          {/* Stats Section - improved spacing and visual hierarchy */}
+          {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12 relative z-10 stagger-container">
             {/* Toned down vertical beam for better design integration */}
             <div className="absolute inset-0 opacity-50" style={{ background: "linear-gradient(to bottom, transparent, rgba(234, 56, 76, 0.3), transparent)" }}></div>

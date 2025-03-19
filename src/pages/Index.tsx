@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Hero } from '@/components/Hero';
@@ -17,7 +16,7 @@ const Index = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto perspective-section">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
-              <span className="text-white">Your Personal JJ</span> <span className="text-theme">Guide</span>
+              <span className="text-white">YOUR PERSONAL JJ</span> <span className="text-theme">GUIDE</span>
             </h2>
             <p className="text-muted-foreground">Comprehensive tools to enhance your Jiu-Jitsu training, track progress, and achieve your goals on and off the mat.</p>
           </div>
@@ -58,18 +57,16 @@ const Index = () => {
       </section>
       
       <section className="py-16 md:py-20 bg-black/30 backdrop-blur-sm relative">
-        {/* Replace harsh orange beam with subtle gradient accents */}
         <div className="absolute -right-20 top-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="left" data-parallax-speed="5"></div>
         
         <div className="absolute -left-20 bottom-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="right" data-parallax-speed="7"></div>
         
-        {/* Subtle accent line */}
         <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-theme/30 to-transparent opacity-50"></div>
         
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="text-center mb-12 perspective-section">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase">
-              <span className="text-white">Featured</span> <span className="text-theme">Techniques</span>
+              <span className="text-white">FEATURED</span> <span className="text-theme">TECHNIQUES</span>
             </h2>
           </div>
 
@@ -83,7 +80,7 @@ const Index = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto text-center perspective-section">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6 uppercase">
-              <span className="text-white">Start Your JJ</span> <span className="text-theme">Journey</span>
+              <span className="text-white">START YOUR JJ</span> <span className="text-theme">JOURNEY</span>
             </h2>
             <p className="text-muted-foreground mb-8 md:mb-10">
               Whether you're just beginning or looking to refine your skills, 

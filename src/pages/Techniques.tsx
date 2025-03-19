@@ -17,8 +17,8 @@ const Techniques = () => {
         
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto mb-12">
-            <h1 className="text-4xl font-bold tracking-tight mb-4 text-center">
-              <span className="text-white">Jiu-Jitsu</span> <span className="text-theme">Techniques</span>
+            <h1 className="text-4xl font-bold tracking-tight mb-4 text-center uppercase">
+              <span className="text-white">JIU-JITSU</span> <span className="text-theme">TECHNIQUES</span>
             </h1>
             <p className="text-muted-foreground text-center mb-8">
               Explore our comprehensive collection of Jiu-Jitsu techniques,
@@ -39,8 +39,8 @@ const Techniques = () => {
               <Card className="hover:border-theme/50 transition-all hover:-translate-y-1 h-full">
                 <CardContent className="p-6 flex flex-col items-center text-center">
                   <Calendar className="w-16 h-16 mb-4 text-theme" />
-                  <h2 className="text-2xl font-bold mb-2">
-                    <span className="text-white">Training</span> <span className="text-theme">Planner</span>
+                  <h2 className="text-2xl font-bold mb-2 uppercase">
+                    <span className="text-white">TRAINING</span> <span className="text-theme">PLANNER</span>
                   </h2>
                   <p className="text-muted-foreground">
                     Create personalized training plans, schedule sessions, and optimize your Jiu-Jitsu journey.
@@ -53,8 +53,8 @@ const Techniques = () => {
               <Card className="hover:border-theme/50 transition-all hover:-translate-y-1 h-full">
                 <CardContent className="p-6 flex flex-col items-center text-center">
                   <BarChart3 className="w-16 h-16 mb-4 text-theme" />
-                  <h2 className="text-2xl font-bold mb-2">
-                    <span className="text-white">Progress</span> <span className="text-theme">Tracking</span>
+                  <h2 className="text-2xl font-bold mb-2 uppercase">
+                    <span className="text-white">PROGRESS</span> <span className="text-theme">TRACKING</span>
                   </h2>
                   <p className="text-muted-foreground">
                     Monitor your Jiu-Jitsu journey, track skill development, and visualize your growth on the mat.
