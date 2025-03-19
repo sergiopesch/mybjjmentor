@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Play, Info, BookOpen } from 'lucide-react';
+import { Play, Info, BookOpen, AlignLeft } from 'lucide-react';
 import { VideoPlayer } from './VideoPlayer';
 
 // Sample technique data
@@ -89,7 +89,7 @@ export const TechniqueLibrary = () => {
   return (
     <section className="py-12">
       <div className="container max-w-6xl px-4 mx-auto">
-        <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 perspective-section">
+        <div className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 perspective-section">
           <h2 className="text-3xl font-bold tracking-tight">Technique Library</h2>
           <Tabs defaultValue="All" className="w-full md:w-auto">
             <TabsList className="grid grid-cols-2 md:grid-cols-5 w-full md:w-auto">
@@ -106,70 +106,88 @@ export const TechniqueLibrary = () => {
           </Tabs>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1 space-y-4 stagger-container">
+        <div className="grid grid-cols-1 gap-8">
+          {selectedTechnique && (
+            <Card className="overflow-hidden border-2 shadow-lg">
+              <div className="grid md:grid-cols-5 gap-0">
+                <div className="md:col-span-3 aspect-video bg-muted relative">
+                  {showVideo ? (
+                    <VideoPlayer url={selectedTechnique.videoUrl} />
+                  ) : (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-bjj-blue/10 to-bjj-purple/10">
+                      <h3 className="text-xl md:text-2xl font-semibold mb-3">{selectedTechnique.title}</h3>
+                      <Button onClick={() => setShowVideo(true)} size="lg" className="flex items-center gap-2">
+                        <Play className="w-5 h-5" />
+                        Play Video
+                      </Button>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="md:col-span-2">
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <CardTitle className="text-xl md:text-2xl">{selectedTechnique.title}</CardTitle>
+                      <Badge className="ml-2" variant="outline">{selectedTechnique.level}</Badge>
+                    </div>
+                    <CardDescription className="flex items-center mt-2">
+                      <span className="mr-3">{selectedTechnique.category}</span>
+                      <span>From {selectedTechnique.position}</span>
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <Tabs defaultValue="description" className="w-full">
+                      <TabsList className="grid w-full grid-cols-2">
+                        <TabsTrigger value="description" className="flex items-center gap-2">
+                          <Info className="w-4 h-4" />
+                          Description
+                        </TabsTrigger>
+                        <TabsTrigger value="steps" className="flex items-center gap-2">
+                          <AlignLeft className="w-4 h-4" />
+                          Steps
+                        </TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="description" className="pt-4">
+                        <p className="text-muted-foreground">{selectedTechnique.description}</p>
+                      </TabsContent>
+                      <TabsContent value="steps" className="pt-4">
+                        <ol className="space-y-2 list-decimal list-inside text-muted-foreground">
+                          {selectedTechnique.steps.map((step, index) => (
+                            <li key={index}>{step}</li>
+                          ))}
+                        </ol>
+                      </TabsContent>
+                    </Tabs>
+                  </CardContent>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-container">
             {filteredTechniques.map((technique, index) => (
-              <div 
+              <Card 
                 key={technique.id}
-                className={`glass-card p-4 cursor-pointer transition-all stagger-item ${selectedTechnique.id === technique.id ? 'ring-2 ring-bjj-blue ring-offset-2' : ''}`}
+                className={`cursor-pointer transition-all stagger-item ${selectedTechnique.id === technique.id ? 'border-2 border-bjj-blue' : ''}`}
                 onClick={() => {
                   setSelectedTechnique(technique);
                   setShowVideo(false);
                 }}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                style={{ transitionDelay: `${index * 50}ms` }}
               >
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-medium">{technique.title}</h3>
-                  <Badge variant="outline">{technique.level}</Badge>
-                </div>
-                <div className="flex items-center text-sm text-muted-foreground">
-                  <span className="mr-3">{technique.category}</span>
-                  <span>From {technique.position}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="lg:col-span-2 perspective-section">
-            <Card className="overflow-hidden">
-              <div className="aspect-video bg-muted relative">
-                {showVideo ? (
-                  <VideoPlayer url={selectedTechnique.videoUrl} />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-bjj-blue/10 to-bjj-purple/10">
-                    <h3 className="text-xl font-semibold mb-2">{selectedTechnique.title}</h3>
-                    <Button onClick={() => setShowVideo(true)} className="flex items-center gap-2">
-                      <Play className="w-4 h-4" />
-                      Play Video
-                    </Button>
+                <CardHeader className="p-4">
+                  <div className="flex justify-between items-start">
+                    <CardTitle className="text-lg">{technique.title}</CardTitle>
+                    <Badge variant="outline">{technique.level}</Badge>
                   </div>
-                )}
-              </div>
-              <CardContent className="p-6">
-                <Tabs defaultValue="description">
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="description" className="flex items-center gap-2">
-                      <Info className="w-4 h-4" />
-                      Description
-                    </TabsTrigger>
-                    <TabsTrigger value="steps" className="flex items-center gap-2">
-                      <BookOpen className="w-4 h-4" />
-                      Step by Step
-                    </TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="description" className="pt-4">
-                    <p className="text-muted-foreground">{selectedTechnique.description}</p>
-                  </TabsContent>
-                  <TabsContent value="steps" className="pt-4">
-                    <ol className="space-y-3 list-decimal list-inside text-muted-foreground">
-                      {selectedTechnique.steps.map((step, index) => (
-                        <li key={index}>{step}</li>
-                      ))}
-                    </ol>
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
+                  <CardDescription className="flex items-center mt-2">
+                    <span className="mr-3">{technique.category}</span>
+                    <span>From {technique.position}</span>
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
