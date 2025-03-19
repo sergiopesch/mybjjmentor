@@ -47,10 +47,7 @@ export const Hero = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h1 ref={titleRef} className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 uppercase">A FRAMEWORK TO MASTERY</h1>
           
-          <p className="text-sm md:text-base uppercase tracking-widest text-muted-foreground mb-12 perspective-section">
-            Support your growth every step of the way
-            — no matter where you're headed
-          </p>
+          <p className="text-sm md:text-base uppercase tracking-widest text-muted-foreground mb-12 perspective-section">SUPPORT YOUR GROWTH EVERY STEP OF THE WAY — NO MATTER WHERE YOU ARE</p>
           
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative z-10 stagger-container">
