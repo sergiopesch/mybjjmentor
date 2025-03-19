@@ -78,7 +78,7 @@ const Index = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-3xl mx-auto text-center perspective-section">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6 uppercase">
-              <span className="text-white">START YOUR JJ</span> <span className="text-theme">JOURNEY</span>
+              <span className="text-white">START YOUR</span> <span className="text-theme">JOURNEY</span>
             </h2>
             <p className="text-muted-foreground mb-8 md:mb-10">
               Whether you're just beginning or looking to refine your skills, 
