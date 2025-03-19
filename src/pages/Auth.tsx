@@ -48,7 +48,7 @@ const Auth = () => {
         <div className="container max-w-6xl px-4 mx-auto">
           <div className="max-w-md mx-auto">
             <h1 className="text-4xl font-bold tracking-tight mb-4 text-center uppercase auth-title">
-              <span className="text-white">JOIN</span> <span className="animated-gradient">MASTER</span>
+              <span className="text-white">JOIN</span> <span className="text-transparent bg-clip-text bg-animated-gradient animated-gradient">MASTER</span>
             </h1>
             <p className="text-muted-foreground text-center mb-8 perspective-section">Sign in to track your progress, save favourite techniques, and customise your Jiu-Jitsu training plan.</p>
             
