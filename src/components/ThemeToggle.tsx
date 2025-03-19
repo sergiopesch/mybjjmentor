@@ -20,13 +20,13 @@ export function ThemeToggle() {
     setTheme(newTheme);
     
     // Show toast notification for user feedback
-    const themeLabels = {
+    const themeLabels: Record<string, string> = {
       'light': 'Light',
       'dark': 'Dark',
       'system': 'System'
     };
     
-    toast.success(`Theme switched to ${themeLabels[newTheme as keyof typeof themeLabels]} mode`, {
+    toast.success(`Theme switched to ${themeLabels[newTheme]} mode`, {
       duration: 2000,
     });
   };

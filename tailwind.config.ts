@@ -121,7 +121,7 @@ export default {
 					'0%, 100%': { opacity: '0.6' },
 					'50%': { opacity: '1' },
 				},
-                // New animations
+                // Additional animations
                 'rotate-in': {
                     from: { opacity: '0', transform: 'rotate(-5deg) scale(0.95)' },
                     to: { opacity: '1', transform: 'rotate(0) scale(1)' }
@@ -157,7 +157,7 @@ export default {
 				'scale-in': 'scale-in 0.4s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-                // New animations
+                // Additional animations
                 'rotate-in': 'rotate-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
                 'blur-in': 'blur-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                 'fade-slide-up': 'fade-slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)',

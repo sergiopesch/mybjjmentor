@@ -38,11 +38,11 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => (
-  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
+  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Sonner position="top-right" theme="light" className="toaster-override" />
+        <Sonner position="top-right" className="toaster-override" />
         <AuthProvider>
           <BrowserRouter>
             <AnimatedRoutes />
