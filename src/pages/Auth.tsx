@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
 import { AuthForm } from '@/components/AuthForm';
