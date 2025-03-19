@@ -1,0 +1,93 @@
+
+/* Custom utility classes */
+@layer components {
+  .glass-card {
+    @apply bg-black/30 backdrop-blur-lg border border-white/10 shadow-glass rounded-xl dark:bg-black/30 dark:border-white/10;
+  }
+  
+  .light .glass-card {
+    @apply bg-white/70 backdrop-blur-lg border border-black/10 shadow-glass;
+  }
+  
+  .page-container {
+    @apply container max-w-6xl px-4 sm:px-6 py-12 mx-auto animate-fade-in;
+  }
+
+  .section-title {
+    @apply text-2xl sm:text-3xl font-bold tracking-tight mb-6;
+  }
+  
+  /* Hover effects for interactive elements */
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-glow:hover {
+    @apply shadow-glow filter brightness-110;
+    text-shadow: 0 0 8px theme('colors.theme.DEFAULT');
+  }
+
+  /* 3D card tilt effect */
+  .tilt-card {
+    @apply transition-transform duration-300 ease-out;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  /* Page transition wrapper */
+  .page-transition-wrapper {
+    @apply relative overflow-hidden;
+    perspective: 1200px;
+  }
+  
+  /* Page transition animation */
+  .animate-page-transition {
+    @apply animate-fade-slide-up;
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+  }
+}
+
+/* Enhanced animated underline */
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, theme('colors.theme.DEFAULT'), theme('colors.theme.red'));
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.animated-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Animated gradient text */
+.animated-gradient {
+  background-size: 200% auto;
+  background-image: linear-gradient(90deg, theme('colors.theme.DEFAULT') 0%, theme('colors.theme.red') 50%, theme('colors.theme.DEFAULT') 100%);
+  animation: shiftGradient 3s ease infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Particle overlay effect */
+.particle-overlay {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.light .particle-overlay {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}

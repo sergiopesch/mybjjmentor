@@ -1,0 +1,142 @@
+
+/* Enhanced animation classes */
+@layer components {
+  .fade-in-section {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+
+  .slide-in-section {
+    @apply opacity-0 -translate-x-8 transition-all duration-700 ease-out;
+  }
+
+  .rotate-in-section {
+    @apply opacity-0 transition-all duration-700 ease-out rotate-3 scale-95;
+  }
+
+  .fade-in-section.appear {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .slide-in-section.appear {
+    @apply opacity-100 translate-x-0;
+  }
+
+  .rotate-in-section.appear {
+    @apply opacity-100 rotate-0 scale-100;
+  }
+  
+  /* Enhanced scroll animations */
+  .perspective-section {
+    @apply opacity-0 transform-gpu transition-all duration-700;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    animation: perspective-rotate-in 0.8s ease-out forwards paused;
+  }
+  
+  .perspective-section.perspective-animate {
+    @apply opacity-100;
+  }
+  
+  .parallax-element {
+    @apply transition-transform duration-700 ease-out will-change-transform;
+  }
+  
+  .stagger-container {
+    @apply overflow-hidden;
+  }
+  
+  .mouse-track {
+    @apply transition-transform duration-200 will-change-transform;
+    transform-style: preserve-3d;
+  }
+  
+  .accent-glow {
+    @apply shadow-glow;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-theme to-theme-red bg-clip-text text-transparent;
+  }
+  
+  .orange-beam {
+    @apply relative after:absolute after:w-px after:sm:w-0.5 after:h-full after:bg-gradient-to-b after:from-theme/30 after:to-theme after:inset-0 after:mx-auto after:animate-pulse-glow;
+  }
+
+  /* Parallax background effect */
+  .parallax-bg {
+    @apply transition-transform;
+    transform: translateZ(-10px) scale(2);
+    will-change: transform;
+  }
+}
+
+/* Enhanced page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 700ms, transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translate3d(0, -20px, 0);
+  transition: opacity 700ms, transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Keyframe animations */
+@keyframes shiftGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 10px rgba(234, 56, 76, 0.2); }
+  50% { opacity: 1; box-shadow: 0 0 20px rgba(234, 56, 76, 0.6); }
+}
+
+@keyframes fade-slide-up {
+  from { 
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes perspective-rotate-in {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0);
+  }
+}
+
+@keyframes clip-path-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
