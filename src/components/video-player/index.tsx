@@ -17,7 +17,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const [bufferProgress, setBufferProgress] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const togglePlay = () => {
@@ -93,9 +95,19 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
   };
 
   const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
+    if (containerRef.current) {
+      if (!document.fullscreenElement) {
+        containerRef.current.requestFullscreen().then(() => {
+          setIsFullscreen(true);
+        }).catch(err => {
+          console.log('Error attempting to enable fullscreen:', err);
+        });
+      } else {
+        document.exitFullscreen().then(() => {
+          setIsFullscreen(false);
+        }).catch(err => {
+          console.log('Error attempting to exit fullscreen:', err);
+        });
       }
     }
   };
@@ -111,6 +123,19 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
       videoRef.current.currentTime = Math.max(videoRef.current.currentTime - 10, 0);
     }
   };
+
+  // Handle fullscreen change event
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
 
   // Pre-load video metadata
   useEffect(() => {
@@ -129,7 +154,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
 
   return (
     <div 
-      className="relative w-full h-full bg-black rounded-lg overflow-hidden"
+      ref={containerRef}
+      className={cn(
+        "relative w-full h-full bg-black rounded-lg overflow-hidden",
+        isFullscreen && "fixed inset-0 z-50"
+      )}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => isPlaying && setShowControls(false)}
     >

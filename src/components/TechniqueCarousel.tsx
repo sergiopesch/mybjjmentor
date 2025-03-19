@@ -24,6 +24,7 @@ const techniques = [
     instructor: 'Master Lee',
     description: 'A fundamental submission that hyperextends the opponent\'s elbow joint when applied correctly.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    thumbnail: '/placeholder.svg'
   },
   {
     id: 2,
@@ -34,6 +35,7 @@ const techniques = [
     instructor: 'Master Chen',
     description: 'A powerful choke that uses your legs to cut off blood flow to your opponent\'s brain.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    thumbnail: '/placeholder.svg'
   },
   {
     id: 3,
@@ -44,6 +46,7 @@ const techniques = [
     instructor: 'Master Kim',
     description: 'An effective technique to reverse positions from guard to mount using leverage and timing.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    thumbnail: '/placeholder.svg'
   },
   {
     id: 4,
@@ -54,6 +57,7 @@ const techniques = [
     instructor: 'Master Garcia',
     description: 'A powerful shoulder lock that can be applied from multiple positions including guard.',
     videoUrl: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+    thumbnail: '/placeholder.svg'
   }
 ];
 
@@ -82,7 +86,9 @@ export const TechniqueCarousel = () => {
               >
                 <div className="aspect-video relative group">
                   {playingVideo === technique.id ? (
-                    <VideoPlayer url={technique.videoUrl} />
+                    <div className="h-full">
+                      <VideoPlayer url={technique.videoUrl} />
+                    </div>
                   ) : (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-black/80 to-black/60 group-hover:from-black/60 group-hover:to-black/40 transition-all duration-300">
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
@@ -114,7 +120,7 @@ export const TechniqueCarousel = () => {
                   {/* Preview image (replace with actual technique thumbnails in production) */}
                   {playingVideo !== technique.id && (
                     <div className="absolute inset-0 z-0 bg-cover bg-center opacity-80"
-                         style={{ backgroundImage: `url('/placeholder.svg')` }}>
+                         style={{ backgroundImage: `url('${technique.thumbnail}')` }}>
                     </div>
                   )}
                 </div>
@@ -127,6 +133,20 @@ export const TechniqueCarousel = () => {
                     </div>
                     <p className="text-sm text-white/80 line-clamp-2">{technique.description}</p>
                   </CardContent>
+                )}
+                
+                {/* Add a close button when video is playing */}
+                {playingVideo === technique.id && (
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPlayingVideo(null);
+                    }}
+                    className="absolute top-2 right-2 z-20 bg-black/50 hover:bg-black/80 w-8 h-8 rounded-full flex items-center justify-center text-white"
+                    aria-label="Close video"
+                  >
+                    ✕
+                  </button>
                 )}
               </Card>
             </div>
