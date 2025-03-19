@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -48,7 +49,7 @@ export const Hero = () => {
       {/* Content */}
       <div className="container max-w-6xl px-4 mx-auto relative">
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* Updated heading format with white/red text */}
+          {/* Updated heading format with white/theme text split */}
           <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 uppercase leading-tight hyphens-auto px-2 break-words">
             <span className="text-white">A FRAMEWORK TO</span> <span className="text-theme">MASTERY</span>
           </h1>
@@ -80,7 +81,7 @@ export const Hero = () => {
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link to="/planner" className="w-full sm:w-auto stagger-item">
+            <Link to="/techniques/planner" className="w-full sm:w-auto stagger-item">
               <Button variant="outline" size="lg" className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme hover:bg-theme/5">
                 CREATE PLAN
               </Button>
