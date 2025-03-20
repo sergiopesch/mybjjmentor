@@ -165,3 +165,56 @@ export interface Database {
     }
   }
 }
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export interface Database {
+  public: {
+    Tables: {
+      user_profiles: {
+        Row: {
+          id: string
+          user_id: string
+          full_name: string | null
+          avatar_url: string | null
+          belt_rank: string | null
+          experience_years: number | null
+          weight_class: string | null
+          goals: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          full_name?: string | null
+          avatar_url?: string | null
+          belt_rank?: string | null
+          experience_years?: number | null
+          weight_class?: string | null
+          goals?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          full_name?: string | null
+          avatar_url?: string | null
+          belt_rank?: string | null
+          experience_years?: number | null
+          weight_class?: string | null
+          goals?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      // Add other table types here as needed
+    }
+  }
+}
