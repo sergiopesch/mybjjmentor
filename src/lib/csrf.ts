@@ -1,18 +1,28 @@
-
 import { NextFunction, Request, Response } from 'express';
+import crypto from 'crypto';
 
-export const generateCSRFToken = () => {
-  return Math.random().toString(36).slice(2);
+// CSRF Token generation and validation
+export const generateCSRFToken = (): string => {
+  return crypto.randomBytes(32).toString('hex');
 };
 
 export const csrfProtection = (req: Request, res: Response, next: NextFunction) => {
-  if (['POST', 'PUT', 'DELETE'].includes(req.method)) {
-    const clientToken = req.headers['x-csrf-token'];
-    const serverToken = req.session?.csrfToken;
-    
-    if (!clientToken || !serverToken || clientToken !== serverToken) {
-      return res.status(403).json({ error: 'Invalid CSRF token' });
-    }
+  if (req.method === 'GET') {
+    const token = generateCSRFToken();
+    res.cookie('XSRF-TOKEN', token, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
+    });
+    return next();
   }
+
+  const cookieToken = req.cookies['XSRF-TOKEN'];
+  const headerToken = req.headers['x-xsrf-token'];
+
+  if (!cookieToken || !headerToken || cookieToken !== headerToken) {
+    return res.status(403).json({ error: 'CSRF token validation failed' });
+  }
+
   next();
 };
