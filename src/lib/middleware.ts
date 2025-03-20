@@ -6,7 +6,11 @@ export const rateLimit = (req: Request, res: Response, next: NextFunction) => {
   const ip = req.ip || req.socket.remoteAddress || 'unknown';
   
   if (SecurityMonitor.isIPBlocked(ip)) {
-    return res.status(403).json({ error: 'IP blocked due to suspicious activity' });
+    SecurityMonitor.assessThreat(ip, 'BLOCKED_ATTEMPT');
+    return res.status(403).json({ 
+      error: 'Access denied',
+      message: 'Your IP has been blocked due to suspicious activity'
+    });
   }
 
   if (!RateLimiter.checkLimit(ip)) {
