@@ -1,93 +1,146 @@
 
-/* Custom utility classes */
+/* Luxury Minimalist Component Styles */
 @layer components {
+  /* Editorial card with thin border */
+  .luxury-card {
+    @apply bg-transparent border border-border/40 transition-all duration-500 ease-luxury;
+  }
+
+  .luxury-card:hover {
+    @apply border-foreground/30;
+  }
+
+  /* Glass card - more subtle */
   .glass-card {
-    @apply bg-black/30 backdrop-blur-lg border border-white/10 shadow-glass rounded-xl dark:bg-black/30 dark:border-white/10;
+    @apply bg-card/50 backdrop-blur-sm border border-border/30 transition-all duration-500 ease-luxury;
   }
-  
+
+  .glass-card:hover {
+    @apply border-border/60;
+  }
+
   .light .glass-card {
-    @apply bg-white/70 backdrop-blur-lg border border-black/10 shadow-glass;
+    @apply bg-white/80 backdrop-blur-sm border border-black/10;
   }
-  
+
+  /* Page container with generous spacing */
   .page-container {
-    @apply container max-w-6xl px-4 sm:px-6 py-12 mx-auto animate-fade-in;
+    @apply container max-w-6xl px-6 sm:px-8 py-20 mx-auto;
   }
 
+  /* Section title - editorial style */
   .section-title {
-    @apply text-2xl sm:text-3xl font-bold tracking-tight mb-6;
-  }
-  
-  /* Hover effects for interactive elements */
-  .hover-glow {
-    @apply transition-all duration-300;
-  }
-  
-  .hover-glow:hover {
-    @apply shadow-glow filter brightness-110;
-    text-shadow: 0 0 8px theme('colors.theme.DEFAULT');
+    @apply font-serif text-display-sm md:text-display-md tracking-tight mb-8;
   }
 
-  /* 3D card tilt effect */
-  .tilt-card {
-    @apply transition-transform duration-300 ease-out;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+  /* Subheading */
+  .section-subtitle {
+    @apply text-sm tracking-extra-wide uppercase text-muted-foreground mb-4;
   }
-  
+
+  /* Elegant horizontal line */
+  .divider-line {
+    @apply h-px bg-border/50 w-full;
+  }
+
+  /* Text reveal animation container */
+  .text-reveal-container {
+    @apply overflow-hidden;
+  }
+
+  /* Link with underline animation */
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-px bg-foreground scale-x-0 origin-right transition-transform duration-500 ease-luxury;
+  }
+
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+
   /* Page transition wrapper */
   .page-transition-wrapper {
     @apply relative overflow-hidden;
-    perspective: 1200px;
   }
-  
+
   /* Page transition animation */
   .animate-page-transition {
-    @apply animate-fade-slide-up;
-    animation-duration: 0.6s;
+    @apply animate-fade-up;
     animation-fill-mode: both;
   }
+
+  /* Reveal section for scroll animations */
+  .reveal-section {
+    @apply opacity-0 translate-y-8 transition-all duration-800 ease-luxury;
+  }
+
+  .reveal-section.appear {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Stagger container */
+  .stagger-container .stagger-item {
+    @apply opacity-0 translate-y-4 transition-all duration-600 ease-luxury;
+  }
+
+  .stagger-container.appear .stagger-item {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-container.appear .stagger-item:nth-child(1) { transition-delay: 0ms; }
+  .stagger-container.appear .stagger-item:nth-child(2) { transition-delay: 100ms; }
+  .stagger-container.appear .stagger-item:nth-child(3) { transition-delay: 200ms; }
+  .stagger-container.appear .stagger-item:nth-child(4) { transition-delay: 300ms; }
+  .stagger-container.appear .stagger-item:nth-child(5) { transition-delay: 400ms; }
+  .stagger-container.appear .stagger-item:nth-child(6) { transition-delay: 500ms; }
 }
 
-/* Enhanced animated underline */
-.animated-underline {
+/* Editorial underline effect */
+.editorial-underline {
   position: relative;
+  display: inline-block;
 }
 
-.animated-underline::after {
+.editorial-underline::after {
   content: '';
   position: absolute;
   width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: -2px;
+  height: 1px;
+  bottom: -4px;
   left: 0;
-  background: linear-gradient(90deg, theme('colors.theme.DEFAULT'), theme('colors.theme.red'));
-  transform-origin: bottom right;
-  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.animated-underline:hover::after {
+.editorial-underline:hover::after {
   transform: scaleX(1);
-  transform-origin: bottom left;
+  transform-origin: left;
 }
 
-/* Animated gradient text */
-.animated-gradient {
-  background-size: 200% auto;
-  background-image: linear-gradient(90deg, theme('colors.theme.DEFAULT') 0%, theme('colors.theme.red') 50%, theme('colors.theme.DEFAULT') 100%);
-  animation: shiftGradient 3s ease infinite;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-/* Particle overlay effect */
+/* Minimal particle overlay - very subtle */
 .particle-overlay {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 .light .particle-overlay {
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styling */
+::selection {
+  background-color: hsl(var(--primary) / 0.2);
+  color: inherit;
 }
