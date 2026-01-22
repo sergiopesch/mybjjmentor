@@ -5,142 +5,169 @@ import { Hero } from '@/components/Hero';
 import { FeatureCard } from '@/components/FeatureCard';
 import { TechniqueCarousel } from '@/components/TechniqueCarousel';
 import { Video, Calendar, BarChart3, Target, Dumbbell, Utensils, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
-  // Add a scroll reveal effect for sections
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('appear');
-        }
-      });
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('appear');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    document.querySelectorAll('.reveal-section').forEach(section => {
+    document.querySelectorAll('.reveal-section').forEach((section) => {
       observer.observe(section);
     });
 
     return () => {
-      document.querySelectorAll('.reveal-section').forEach(section => {
+      document.querySelectorAll('.reveal-section').forEach((section) => {
         observer.unobserve(section);
       });
     };
   }, []);
 
-  return <MainLayout>
+  return (
+    <MainLayout>
       <Hero />
-      
-      <section className="py-16 md:py-20 relative overflow-hidden reveal-section">
-        <div className="absolute top-[20%] left-[10%] w-64 h-64 bg-theme/5 rounded-full filter blur-3xl opacity-20 parallax-element" data-parallax-direction="left" data-parallax-speed="5"></div>
 
-        <div className="container max-w-6xl px-4 mx-auto">
-          <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto perspective-section">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4 uppercase">
-              <span className="text-white">YOUR PERSONAL</span> <span className="text-theme animated-gradient">GUIDE</span>
+      {/* Features Section */}
+      <section className="py-24 md:py-32 reveal-section">
+        <div className="container max-w-7xl px-6 mx-auto">
+          {/* Section Header */}
+          <div className="max-w-2xl mb-16 md:mb-24">
+            <p className="text-xs tracking-ultra-wide uppercase text-muted-foreground mb-4">
+              Your Training Companion
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-6">
+              Everything You Need
             </h2>
-            <p className="text-muted-foreground">Comprehensive tools to enhance your Jiu-Jitsu training, track progress, and achieve your goals on and off the mat.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 stagger-container">
-            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
-              <Link to="/techniques" className="block h-full">
-                <FeatureCard title="Techniques" description="Access a comprehensive collection of JJ techniques with detailed step-by-step instructions." icon={Video} />
-              </Link>
-            </div>
-            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
-              <Link to="/techniques/planner" className="block h-full">
-                <FeatureCard title="Training Planner" description="Create personalized training plans based on your skill level and specific goals." icon={Calendar} />
-              </Link>
-            </div>
-            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
-              <Link to="/techniques/progress" className="block h-full">
-                <FeatureCard title="Progress Tracking" description="Monitor your journey, track your skill development, and visualize your growth." icon={BarChart3} />
-              </Link>
-            </div>
-            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
-              <Link to="/techniques" className="block h-full">
-                <FeatureCard title="Goal Setting" description="Set specific, measurable goals and get guidance on how to achieve them." icon={Target} />
-              </Link>
-            </div>
-            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
-              <Link to="/fitness" className="block h-full">
-                <FeatureCard title="Fitness" description="Track and improve your fitness to enhance your jiu-jitsu performance." icon={Dumbbell} />
-              </Link>
-            </div>
-            <div className="stagger-item col-span-1 sm:col-span-1 lg:col-span-1">
-              <Link to="/nutrition" className="block h-full">
-                <FeatureCard title="Nutrition" description="Optimize your nutrition to fuel your training and recovery." icon={Utensils} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <section id="master-techniques" className="py-16 md:py-24 bg-black/30 backdrop-blur-sm relative overflow-hidden reveal-section">
-        <div className="absolute -right-20 top-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="left" data-parallax-speed="5"></div>
-        
-        <div className="absolute -left-20 bottom-20 w-64 h-64 md:w-96 md:h-96 rounded-full bg-theme/5 filter blur-3xl parallax-element" data-parallax-direction="right" data-parallax-speed="7"></div>
-        
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-theme/30 to-transparent opacity-50"></div>
-        
-        <div className="container max-w-6xl px-4 mx-auto">
-          <div className="text-center mb-12 md:mb-16 perspective-section">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase mb-4">
-              <span className="text-white">MASTER</span> <span className="text-theme animated-gradient">TECHNIQUES</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Master these essential techniques to elevate your game. Each video provides detailed instruction 
-              from experienced practitioners.
+            <p className="text-muted-foreground leading-relaxed">
+              Comprehensive tools designed to enhance every aspect of your Jiu-Jitsu journey,
+              from technique mastery to physical conditioning.
             </p>
           </div>
 
-          <div className="technique-carousel-container stagger-item">
-            <TechniqueCarousel />
-          </div>
-          
-          <div className="flex justify-center mt-10">
-            <Link to="/techniques">
-              <Button variant="outline" className="border-theme/50 text-theme hover:border-theme hover:bg-theme/5 group">
-                VIEW ALL TECHNIQUES
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+          {/* Feature Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30">
+            <Link to="/techniques" className="block bg-background">
+              <FeatureCard
+                title="Techniques"
+                description="Access a comprehensive collection of Jiu-Jitsu techniques with detailed step-by-step instructions and video demonstrations."
+                icon={Video}
+              />
+            </Link>
+            <Link to="/techniques/planner" className="block bg-background">
+              <FeatureCard
+                title="Training Planner"
+                description="Create personalized training plans tailored to your skill level, available time, and specific goals."
+                icon={Calendar}
+              />
+            </Link>
+            <Link to="/techniques/progress" className="block bg-background">
+              <FeatureCard
+                title="Progress Tracking"
+                description="Monitor your journey, track skill development, and visualize your growth over time."
+                icon={BarChart3}
+              />
+            </Link>
+            <Link to="/techniques" className="block bg-background">
+              <FeatureCard
+                title="Goal Setting"
+                description="Set specific, measurable goals and receive guidance on achieving them efficiently."
+                icon={Target}
+              />
+            </Link>
+            <Link to="/fitness" className="block bg-background">
+              <FeatureCard
+                title="Fitness"
+                description="Track and improve your physical conditioning to enhance your performance on the mat."
+                icon={Dumbbell}
+              />
+            </Link>
+            <Link to="/nutrition" className="block bg-background">
+              <FeatureCard
+                title="Nutrition"
+                description="Optimize your nutrition to properly fuel your training sessions and recovery."
+                icon={Utensils}
+              />
             </Link>
           </div>
         </div>
       </section>
-      
-      <section className="py-16 md:py-24 relative overflow-hidden reveal-section">
-        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-theme/5 rounded-full filter blur-3xl opacity-20 parallax-element" data-parallax-direction="up" data-parallax-speed="10"></div>
-        
-        <div className="container max-w-6xl px-4 mx-auto">
-          <div className="max-w-3xl mx-auto text-center perspective-section">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-4 md:mb-6 uppercase">
-              <span className="text-white">START YOUR</span> <span className="text-theme animated-gradient">JOURNEY</span>
-            </h2>
-            <p className="text-muted-foreground mb-8 md:mb-10">
-              Whether you're just beginning or looking to refine your skills, 
-              our comprehensive tools will help you progress and excel in Jiu-Jitsu.
+
+      {/* Techniques Showcase Section */}
+      <section className="py-24 md:py-32 bg-card/30 reveal-section">
+        <div className="container max-w-7xl px-6 mx-auto">
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+            <div className="max-w-xl">
+              <p className="text-xs tracking-ultra-wide uppercase text-muted-foreground mb-4">
+                Featured Collection
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-tight">
+                Master Techniques
+              </h2>
+            </div>
+            <Link
+              to="/techniques"
+              className="group flex items-center gap-3 text-sm tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              <span>View All</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1} />
+            </Link>
+          </div>
+
+          {/* Technique Carousel */}
+          <div className="technique-carousel-container">
+            <TechniqueCarousel />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 md:py-32 reveal-section">
+        <div className="container max-w-7xl px-6 mx-auto">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-xs tracking-ultra-wide uppercase text-muted-foreground mb-4">
+              Begin Today
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 stagger-container">
-              <Link to="/techniques/planner" className="w-full sm:w-auto stagger-item">
-                <Button size="lg" className="w-full sm:w-auto bg-theme hover:bg-theme/80 text-white group">
-                  CREATE TRAINING PLAN
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-6">
+              Start Your Journey
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-12 max-w-xl mx-auto">
+              Whether you're just beginning or refining your skills,
+              our comprehensive tools will guide you toward mastery.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+              <Link
+                to="/techniques/planner"
+                className="group flex items-center gap-3 text-sm tracking-extra-wide uppercase transition-all duration-300 hover:gap-5"
+              >
+                <span>Create Training Plan</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1} />
               </Link>
-              <Link to="/techniques/progress" className="w-full sm:w-auto stagger-item">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto border-theme/50 text-theme hover:border-theme hover:bg-theme/5">
-                  TRACK YOUR PROGRESS
-                </Button>
+
+              <span className="hidden sm:block text-border">|</span>
+
+              <Link
+                to="/techniques/progress"
+                className="text-sm tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                Track Progress
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </MainLayout>;
+    </MainLayout>
+  );
 };
 
 export default Index;

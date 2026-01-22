@@ -1,147 +1,114 @@
 
-/* Enhanced animation classes */
+/* Luxury Minimalist Animation Classes */
 @layer components {
+  /* Elegant fade in section */
   .fade-in-section {
-    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
-  }
-
-  .slide-in-section {
-    @apply opacity-0 -translate-x-8 transition-all duration-700 ease-out;
-  }
-
-  .rotate-in-section {
-    @apply opacity-0 transition-all duration-700 ease-out rotate-3 scale-95;
+    @apply opacity-0 translate-y-6 transition-all duration-800;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .fade-in-section.appear {
     @apply opacity-100 translate-y-0;
   }
 
+  /* Slide in from left */
+  .slide-in-section {
+    @apply opacity-0 -translate-x-6 transition-all duration-800;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .slide-in-section.appear {
     @apply opacity-100 translate-x-0;
   }
 
-  .rotate-in-section.appear {
-    @apply opacity-100 rotate-0 scale-100;
-  }
-  
-  /* Enhanced scroll animations */
+  /* Perspective section - subtle 3D */
   .perspective-section {
-    @apply opacity-0 transform-gpu transition-all duration-700;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    animation: perspective-rotate-in 0.8s ease-out forwards paused;
+    @apply opacity-0 transition-all duration-800;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
+
   .perspective-section.perspective-animate {
     @apply opacity-100;
   }
-  
+
+  /* Parallax element */
   .parallax-element {
-    @apply transition-transform duration-700 ease-out will-change-transform;
-  }
-  
-  .stagger-container {
-    @apply overflow-hidden;
-  }
-  
-  .mouse-track {
-    @apply transition-transform duration-200 will-change-transform;
-    transform-style: preserve-3d;
-  }
-  
-  .accent-glow {
-    @apply shadow-glow;
-  }
-  
-  .text-gradient {
-    @apply bg-gradient-to-br from-theme to-theme-red bg-clip-text text-transparent;
-  }
-  
-  .orange-beam {
-    @apply relative after:absolute after:w-px after:sm:w-0.5 after:h-full after:bg-gradient-to-b after:from-theme/30 after:to-theme after:inset-0 after:mx-auto after:animate-pulse-glow;
+    @apply transition-transform duration-600 will-change-transform;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Parallax background effect */
+  /* Stagger container */
+  .stagger-container {
+    @apply overflow-visible;
+  }
+
+  /* Parallax background effect - subtle */
   .parallax-bg {
-    @apply transition-transform;
-    transform: translateZ(-10px) scale(2);
+    @apply transition-transform duration-600;
     will-change: transform;
   }
 }
 
-/* Enhanced page transitions */
+/* Page transitions - elegant and smooth */
 .page-transition-enter {
   opacity: 0;
-  transform: translate3d(0, 20px, 0);
+  transform: translateY(16px);
 }
 
 .page-transition-enter-active {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition: opacity 700ms, transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .page-transition-exit {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translateY(0);
 }
 
 .page-transition-exit-active {
   opacity: 0;
-  transform: translate3d(0, -20px, 0);
-  transition: opacity 700ms, transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-16px);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Keyframe animations */
-@keyframes shiftGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.6; box-shadow: 0 0 10px rgba(234, 56, 76, 0.2); }
-  50% { opacity: 1; box-shadow: 0 0 20px rgba(234, 56, 76, 0.6); }
-}
-
+/* Keyframe animations - refined */
 @keyframes fade-slide-up {
-  from { 
+  from {
     opacity: 0;
-    transform: translate3d(0, 30px, 0);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
 
-@keyframes perspective-rotate-in {
+@keyframes line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes text-reveal {
   from {
     opacity: 0;
-    transform: perspective(1000px) rotateX(10deg);
+    transform: translateY(100%);
+    clip-path: inset(100% 0 0 0);
   }
   to {
     opacity: 1;
-    transform: perspective(1000px) rotateX(0);
-  }
-}
-
-@keyframes clip-path-reveal {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
+    transform: translateY(0);
     clip-path: inset(0 0 0 0);
   }
 }
 
-/* Split text animation for title */
+/* Split text animation - more elegant */
 .split-text-container {
   display: inline-block;
 }
@@ -149,8 +116,9 @@
 .split-letter {
   display: inline-block;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .split-text-container.animate .split-letter {
@@ -161,11 +129,32 @@
 /* Stagger item animation */
 .stagger-item {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.stagger-container.appear .stagger-item,
 .stagger-item.stagger-appear {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Image reveal animation */
+.image-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--background));
+  transform-origin: right;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-reveal.revealed::after {
+  transform: scaleX(0);
 }

@@ -1,8 +1,8 @@
+
 import React, { useState } from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
@@ -15,7 +15,8 @@ import {
   Clock,
   Plus,
   CheckCircle2,
-  X
+  X,
+  ArrowRight
 } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -27,613 +28,349 @@ import {
   recoveryProtocols
 } from '@/components/fitness/data';
 
-const FitnessCard = ({ 
-  title, 
-  description, 
-  icon: Icon 
-}: { 
-  title: string; 
-  description: string; 
-  icon: React.ElementType 
+const FitnessCard = ({
+  title,
+  description,
+  icon: Icon
+}: {
+  title: string;
+  description: string;
+  icon: React.ElementType;
 }) => (
-  <Card className="glass-card h-full transition-all">
-    <CardHeader className="pb-2">
-      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-theme/10 mb-3">
-        <Icon className="h-5 w-5 text-theme" />
-      </div>
-      <CardTitle className="text-xl">{title}</CardTitle>
-      <CardDescription>{description}</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <p className="text-sm">Track and monitor your {title.toLowerCase()} progress to improve your overall jiu-jitsu performance.</p>
-    </CardContent>
-  </Card>
+  <div className="group p-8 border border-border/30 transition-all duration-500 hover:border-border/60 h-full">
+    <Icon className="h-6 w-6 text-muted-foreground mb-6 group-hover:text-foreground transition-colors duration-500" strokeWidth={1} />
+    <h3 className="font-serif text-xl font-light mb-3">{title}</h3>
+    <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+  </div>
 );
 
-const WorkoutCard = ({ workout, type }: { workout: any, type: string }) => {
+const WorkoutCard = ({ workout, type }: { workout: any; type: string }) => {
   const [completed, setCompleted] = useState(false);
-  
+
   return (
-    <Card className={`transition-all ${completed ? 'bg-primary/5 border-primary/30' : ''}`}>
-      <CardHeader className="pb-2">
-        <div className="flex justify-between items-start">
+    <div className={`border border-border/30 transition-all duration-500 ${completed ? 'bg-card/30' : ''}`}>
+      <div className="p-6">
+        <div className="flex justify-between items-start mb-4">
           <div>
-            <CardTitle className="text-lg">{workout.title}</CardTitle>
-            <CardDescription className="mt-1">{workout.description}</CardDescription>
+            <h3 className="font-serif text-lg font-light mb-2">{workout.title}</h3>
+            <p className="text-sm text-muted-foreground">{workout.description}</p>
           </div>
           {completed && (
-            <Badge className="bg-green-500">Completed</Badge>
+            <span className="text-xs tracking-extra-wide uppercase text-muted-foreground">Done</span>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="pb-2">
-        <div className="flex flex-wrap gap-2 mb-3">
-          <Badge variant="outline" className="flex items-center gap-1">
-            <Clock className="h-3 w-3" /> {workout.duration} min
-          </Badge>
-          <Badge variant="outline" className="flex items-center gap-1">
-            <Activity className="h-3 w-3" /> {workout.difficulty || 'All Levels'}
-          </Badge>
+
+        <div className="flex gap-4 mb-4 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1">
+            <Clock className="h-3 w-3" strokeWidth={1} /> {workout.duration} min
+          </span>
+          <span className="flex items-center gap-1">
+            <Activity className="h-3 w-3" strokeWidth={1} /> {workout.difficulty || 'All Levels'}
+          </span>
         </div>
-        
-        {type === 'strength' && (
-          <div className="space-y-2 my-2">
-            <h4 className="font-medium text-sm">Exercises:</h4>
-            <ul className="space-y-1.5">
-              {workout.exercises.slice(0, 3).map((exercise: any, index: number) => (
-                <li key={index} className="text-sm flex justify-between">
-                  <span>{exercise.name}</span>
-                  <span className="text-muted-foreground">{exercise.sets} x {exercise.reps}</span>
-                </li>
-              ))}
-              {workout.exercises.length > 3 && (
-                <li className="text-sm text-muted-foreground">+ {workout.exercises.length - 3} more exercises</li>
-              )}
-            </ul>
-          </div>
+
+        {type === 'strength' && workout.exercises && (
+          <ul className="space-y-2 mb-4">
+            {workout.exercises.slice(0, 3).map((exercise: any, index: number) => (
+              <li key={index} className="text-sm flex justify-between text-muted-foreground">
+                <span>{exercise.name}</span>
+                <span>{exercise.sets} x {exercise.reps}</span>
+              </li>
+            ))}
+            {workout.exercises.length > 3 && (
+              <li className="text-sm text-muted-foreground/60">+ {workout.exercises.length - 3} more</li>
+            )}
+          </ul>
         )}
-        
-        {type === 'conditioning' && (
-          <div className="space-y-2 my-2">
-            <h4 className="font-medium text-sm">Format:</h4>
-            <p className="text-sm">{workout.format}</p>
-            <ul className="flex flex-wrap gap-2 mt-2">
-              {workout.exercises.slice(0, 3).map((exercise: string, index: number) => (
-                <li key={index}>
-                  <Badge variant="secondary" className="font-normal">{exercise}</Badge>
-                </li>
-              ))}
-              {workout.exercises.length > 3 && (
-                <li>
-                  <Badge variant="secondary" className="font-normal">+{workout.exercises.length - 3} more</Badge>
-                </li>
-              )}
-            </ul>
-          </div>
+
+        {type === 'conditioning' && workout.exercises && (
+          <ul className="space-y-2 mb-4">
+            {workout.exercises.slice(0, 3).map((exercise: string, index: number) => (
+              <li key={index} className="text-sm text-muted-foreground">{exercise}</li>
+            ))}
+            {workout.exercises.length > 3 && (
+              <li className="text-sm text-muted-foreground/60">+ {workout.exercises.length - 3} more</li>
+            )}
+          </ul>
         )}
-        
-        {type === 'flexibility' && (
-          <div className="space-y-2 my-2">
-            <div className="flex flex-wrap gap-1 mb-2">
-              {workout.areas.map((area: string, index: number) => (
-                <Badge key={index} variant="secondary" className="font-normal">{area}</Badge>
-              ))}
-            </div>
-            <h4 className="font-medium text-sm">Key poses:</h4>
-            <ul className="space-y-1">
-              {workout.poses.slice(0, 3).map((pose: any, index: number) => (
-                <li key={index} className="text-sm flex justify-between">
-                  <span>{pose.name}</span>
-                  <span className="text-muted-foreground">{pose.duration}</span>
-                </li>
-              ))}
-              {workout.poses.length > 3 && (
-                <li className="text-sm text-muted-foreground">+ {workout.poses.length - 3} more poses</li>
-              )}
-            </ul>
-          </div>
+
+        {type === 'flexibility' && workout.poses && (
+          <ul className="space-y-2 mb-4">
+            {workout.poses.slice(0, 3).map((pose: any, index: number) => (
+              <li key={index} className="text-sm flex justify-between text-muted-foreground">
+                <span>{pose.name}</span>
+                <span>{pose.duration}</span>
+              </li>
+            ))}
+            {workout.poses.length > 3 && (
+              <li className="text-sm text-muted-foreground/60">+ {workout.poses.length - 3} more</li>
+            )}
+          </ul>
         )}
-        
-        {type === 'recovery' && (
-          <div className="space-y-2 my-2">
-            <h4 className="font-medium text-sm">Activities:</h4>
-            <ul className="space-y-1">
-              {workout.activities.slice(0, 3).map((activity: any, index: number) => (
-                <li key={index} className="text-sm flex justify-between">
-                  <span>{activity.name}</span>
-                  <span className="text-muted-foreground">{activity.duration}</span>
-                </li>
-              ))}
-              {workout.activities.length > 3 && (
-                <li className="text-sm text-muted-foreground">+ {workout.activities.length - 3} more activities</li>
-              )}
-            </ul>
-          </div>
+
+        {type === 'recovery' && workout.activities && (
+          <ul className="space-y-2 mb-4">
+            {workout.activities.slice(0, 3).map((activity: any, index: number) => (
+              <li key={index} className="text-sm flex justify-between text-muted-foreground">
+                <span>{activity.name}</span>
+                <span>{activity.duration}</span>
+              </li>
+            ))}
+            {workout.activities.length > 3 && (
+              <li className="text-sm text-muted-foreground/60">+ {workout.activities.length - 3} more</li>
+            )}
+          </ul>
         )}
-      </CardContent>
-      <CardFooter className="flex justify-between pt-2">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">View Details</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>{workout.title}</DialogTitle>
-              <DialogDescription>{workout.description}</DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4 py-4">
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" /> {workout.duration} min
-                </Badge>
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <Activity className="h-3 w-3" /> {workout.difficulty || 'All Levels'}
-                </Badge>
-              </div>
-              
-              {type === 'strength' && (
-                <div className="space-y-2">
-                  <h4 className="font-medium">Exercises:</h4>
-                  <ul className="space-y-2">
+
+        <div className="flex justify-between items-center pt-4 border-t border-border/30">
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="text-xs tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors">
+                View Details
+              </button>
+            </DialogTrigger>
+            <DialogContent className="bg-background border-border/50">
+              <DialogHeader>
+                <DialogTitle className="font-serif text-xl font-light">{workout.title}</DialogTitle>
+                <DialogDescription>{workout.description}</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-4">
+                <div className="flex gap-4 text-sm text-muted-foreground">
+                  <span>{workout.duration} min</span>
+                  <span>{workout.difficulty || 'All Levels'}</span>
+                </div>
+
+                {type === 'strength' && workout.exercises && (
+                  <ul className="space-y-3">
                     {workout.exercises.map((exercise: any, index: number) => (
-                      <li key={index} className="flex justify-between items-center py-1.5 border-b last:border-b-0">
+                      <li key={index} className="flex justify-between py-2 border-b border-border/30 last:border-b-0">
                         <div>
-                          <div className="font-medium">{exercise.name}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {exercise.sets} sets x {exercise.reps}
-                          </div>
+                          <span className="font-medium">{exercise.name}</span>
+                          <span className="text-sm text-muted-foreground ml-2">
+                            {exercise.sets} x {exercise.reps}
+                          </span>
                         </div>
-                        <div className="text-sm">
-                          Rest: {exercise.rest}
-                        </div>
+                        <span className="text-sm text-muted-foreground">Rest: {exercise.rest}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              )}
-              
-              {type === 'conditioning' && (
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium">Format:</h4>
-                    <p className="text-sm mt-1">{workout.format}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Exercises:</h4>
-                    <ul className="space-y-1 mt-1">
-                      {workout.exercises.map((exercise: string, index: number) => (
-                        <li key={index} className="flex items-center py-1.5 border-b last:border-b-0">
-                          <div className="w-6 h-6 flex items-center justify-center rounded-full bg-primary/10 mr-2">
-                            <span className="text-xs font-medium text-primary">{index + 1}</span>
-                          </div>
-                          <span>{exercise}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-              
-              {type === 'flexibility' && (
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium">Target Areas:</h4>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {workout.areas.map((area: string, index: number) => (
-                        <Badge key={index} variant="secondary" className="font-normal">{area}</Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Poses:</h4>
-                    <ul className="space-y-1 mt-1">
-                      {workout.poses.map((pose: any, index: number) => (
-                        <li key={index} className="flex justify-between items-center py-1.5 border-b last:border-b-0">
-                          <span>{pose.name}</span>
-                          <span className="text-sm text-muted-foreground">{pose.duration}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-              
-              {type === 'recovery' && (
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium">Activities:</h4>
-                    <ul className="space-y-1 mt-1">
-                      {workout.activities.map((activity: any, index: number) => (
-                        <li key={index} className="flex justify-between items-center py-1.5 border-b last:border-b-0">
-                          <span>{activity.name}</span>
-                          <span className="text-sm text-muted-foreground">{activity.duration}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Tips:</h4>
-                    <ul className="space-y-1 mt-1">
-                      {workout.tips.map((tip: string, index: number) => (
-                        <li key={index} className="flex items-start py-1">
-                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 shrink-0" />
-                          <span className="text-sm">{tip}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="flex justify-between">
-              <Button variant="outline" onClick={() => setCompleted(!completed)}>
-                {completed ? (
-                  <><X className="mr-2 h-4 w-4" /> Mark Incomplete</>
-                ) : (
-                  <><CheckCircle2 className="mr-2 h-4 w-4" /> Mark Complete</>
                 )}
-              </Button>
-              <Button>Add to Schedule</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-        
-        <Button size="sm" onClick={() => setCompleted(!completed)}>
-          {completed ? 'Completed' : 'Complete'}
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-};
+              </div>
+            </DialogContent>
+          </Dialog>
 
-const StrengthTraining = () => {
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold">BJJ-Specific Strength Training</h3>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Workout
-        </Button>
+          <button
+            onClick={() => setCompleted(!completed)}
+            className="text-xs tracking-extra-wide uppercase hover:text-foreground transition-colors"
+          >
+            {completed ? 'Completed' : 'Complete'}
+          </button>
+        </div>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {strengthWorkouts.map(workout => (
-          <WorkoutCard 
-            key={workout.id} 
-            workout={workout} 
-            type="strength" 
-          />
-        ))}
-      </div>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Training Progress</CardTitle>
-          <CardDescription>
-            Track your strength gains over time
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Pull-up Max</span>
-                <span>12 reps (+2 from last month)</span>
-              </div>
-              <Progress value={60} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Squat 5RM</span>
-                <span>185 lbs (+15 from last month)</span>
-              </div>
-              <Progress value={70} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Deadlift 5RM</span>
-                <span>225 lbs (+20 from last month)</span>
-              </div>
-              <Progress value={75} className="h-2" />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };
 
-const ConditioningProgram = () => {
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold">BJJ Conditioning Programs</h3>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Program
-        </Button>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {conditioningWorkouts.map(workout => (
-          <WorkoutCard 
-            key={workout.id} 
-            workout={workout} 
-            type="conditioning" 
-          />
-        ))}
-      </div>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Cardio Performance</CardTitle>
-          <CardDescription>
-            Track your conditioning metrics
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="text-sm text-muted-foreground mb-1">Resting Heart Rate</div>
-              <div className="text-3xl font-semibold">62 bpm</div>
-              <div className="text-xs text-green-500">-3 from last month</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-sm text-muted-foreground mb-1">Recovery Rate</div>
-              <div className="text-3xl font-semibold">72%</div>
-              <div className="text-xs text-green-500">+5% from last month</div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-sm text-muted-foreground mb-1">HIIT Capacity</div>
-              <div className="text-3xl font-semibold">Level 4</div>
-              <div className="text-xs text-green-500">+1 from last month</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+const StrengthTraining = () => (
+  <div className="space-y-12">
+    <div className="flex justify-between items-center">
+      <h3 className="font-serif text-2xl font-light">Strength Training</h3>
+      <button className="text-xs tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+        <Plus className="h-4 w-4" strokeWidth={1} />
+        Create Workout
+      </button>
     </div>
-  );
-};
 
-const FlexibilityTraining = () => {
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold">Mobility & Flexibility Routines</h3>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Routine
-        </Button>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {flexibilityRoutines.map(routine => (
-          <WorkoutCard 
-            key={routine.id} 
-            workout={routine} 
-            type="flexibility" 
-          />
-        ))}
-      </div>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Flexibility Assessment</CardTitle>
-          <CardDescription>
-            Track your range of motion improvements
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Hip Mobility</span>
-                <span>Intermediate</span>
-              </div>
-              <Progress value={65} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Shoulder Mobility</span>
-                <span>Advanced</span>
-              </div>
-              <Progress value={85} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Hamstring Flexibility</span>
-                <span>Beginner</span>
-              </div>
-              <Progress value={40} className="h-2" />
-            </div>
-            
-            <div>
-              <div className="flex justify-between mb-1 text-sm">
-                <span>Ankle Mobility</span>
-                <span>Intermediate</span>
-              </div>
-              <Progress value={60} className="h-2" />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/30">
+      {strengthWorkouts.map(workout => (
+        <div key={workout.id} className="bg-background">
+          <WorkoutCard workout={workout} type="strength" />
+        </div>
+      ))}
     </div>
-  );
-};
 
-const RecoveryStrategies = () => {
-  return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold">Recovery & Regeneration</h3>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Protocol
-        </Button>
+    <div className="border border-border/30 p-8">
+      <h4 className="font-serif text-lg font-light mb-6">Training Progress</h4>
+      <div className="space-y-6">
+        <div>
+          <div className="flex justify-between mb-2 text-sm">
+            <span>Pull-up Max</span>
+            <span className="text-muted-foreground">12 reps</span>
+          </div>
+          <div className="h-1 bg-border/30">
+            <div className="h-full bg-foreground/30" style={{ width: '60%' }} />
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-between mb-2 text-sm">
+            <span>Squat 5RM</span>
+            <span className="text-muted-foreground">185 lbs</span>
+          </div>
+          <div className="h-1 bg-border/30">
+            <div className="h-full bg-foreground/30" style={{ width: '70%' }} />
+          </div>
+        </div>
+        <div>
+          <div className="flex justify-between mb-2 text-sm">
+            <span>Deadlift 5RM</span>
+            <span className="text-muted-foreground">225 lbs</span>
+          </div>
+          <div className="h-1 bg-border/30">
+            <div className="h-full bg-foreground/30" style={{ width: '75%' }} />
+          </div>
+        </div>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {recoveryProtocols.map(protocol => (
-          <WorkoutCard 
-            key={protocol.id} 
-            workout={protocol} 
-            type="recovery" 
-          />
+    </div>
+  </div>
+);
+
+const ConditioningProgram = () => (
+  <div className="space-y-12">
+    <div className="flex justify-between items-center">
+      <h3 className="font-serif text-2xl font-light">Conditioning</h3>
+      <button className="text-xs tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+        <Plus className="h-4 w-4" strokeWidth={1} />
+        Create Program
+      </button>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/30">
+      {conditioningWorkouts.map(workout => (
+        <div key={workout.id} className="bg-background">
+          <WorkoutCard workout={workout} type="conditioning" />
+        </div>
+      ))}
+    </div>
+
+    <div className="grid grid-cols-3 gap-8 border border-border/30 p-8">
+      <div className="text-center">
+        <p className="text-3xl font-serif font-light mb-2">62</p>
+        <p className="text-xs tracking-extra-wide uppercase text-muted-foreground">Resting BPM</p>
+      </div>
+      <div className="text-center">
+        <p className="text-3xl font-serif font-light mb-2">72%</p>
+        <p className="text-xs tracking-extra-wide uppercase text-muted-foreground">Recovery Rate</p>
+      </div>
+      <div className="text-center">
+        <p className="text-3xl font-serif font-light mb-2">L4</p>
+        <p className="text-xs tracking-extra-wide uppercase text-muted-foreground">HIIT Capacity</p>
+      </div>
+    </div>
+  </div>
+);
+
+const FlexibilityTraining = () => (
+  <div className="space-y-12">
+    <div className="flex justify-between items-center">
+      <h3 className="font-serif text-2xl font-light">Flexibility & Mobility</h3>
+      <button className="text-xs tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+        <Plus className="h-4 w-4" strokeWidth={1} />
+        Create Routine
+      </button>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/30">
+      {flexibilityRoutines.map(routine => (
+        <div key={routine.id} className="bg-background">
+          <WorkoutCard workout={routine} type="flexibility" />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const RecoveryStrategies = () => (
+  <div className="space-y-12">
+    <div className="flex justify-between items-center">
+      <h3 className="font-serif text-2xl font-light">Recovery</h3>
+      <button className="text-xs tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+        <Plus className="h-4 w-4" strokeWidth={1} />
+        Add Protocol
+      </button>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/30">
+      {recoveryProtocols.map(protocol => (
+        <div key={protocol.id} className="bg-background">
+          <WorkoutCard workout={protocol} type="recovery" />
+        </div>
+      ))}
+    </div>
+
+    <div className="border border-border/30 p-8">
+      <h4 className="font-serif text-lg font-light mb-6">Recovery Checklist</h4>
+      <div className="space-y-4">
+        {['8+ hours of sleep', 'Hydration goals met', 'Protein intake sufficient', 'Post-training stretching', 'Foam rolling/massage'].map((item, index) => (
+          <div key={index} className="flex items-center gap-3">
+            <Checkbox id={`check-${index}`} className="border-border/50" />
+            <Label htmlFor={`check-${index}`} className="text-sm text-muted-foreground">{item}</Label>
+          </div>
         ))}
       </div>
-      
-      <Card>
-        <CardHeader>
-          <CardTitle>Sleep & Recovery Tracker</CardTitle>
-          <CardDescription>
-            Monitor your recovery quality
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-1 text-sm">
-                  <span>Average Sleep</span>
-                  <span>7.2 hours</span>
-                </div>
-                <Progress value={72} className="h-2" />
-              </div>
-              
-              <div>
-                <div className="flex justify-between mb-1 text-sm">
-                  <span>Sleep Quality</span>
-                  <span>Good</span>
-                </div>
-                <Progress value={75} className="h-2" />
-              </div>
-              
-              <div>
-                <div className="flex justify-between mb-1 text-sm">
-                  <span>Stress Level</span>
-                  <span>Moderate</span>
-                </div>
-                <Progress value={50} className="h-2" />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Recovery Checklist</h4>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="sleep" />
-                  <Label htmlFor="sleep" className="text-sm">8+ hours of sleep</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="water" defaultChecked />
-                  <Label htmlFor="water" className="text-sm">Hydration goals met</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="protein" defaultChecked />
-                  <Label htmlFor="protein" className="text-sm">Protein intake sufficient</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="stretching" />
-                  <Label htmlFor="stretching" className="text-sm">Post-training stretching</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="foam" />
-                  <Label htmlFor="foam" className="text-sm">Foam rolling/massage</Label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
-  );
-};
+  </div>
+);
 
 const Fitness = () => {
   return (
     <MainLayout>
-      <section className="pt-40 pb-20 relative overflow-hidden">
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-theme/20 rounded-full filter blur-3xl opacity-50 parallax-element" data-parallax-direction="up" data-parallax-speed="10"></div>
-        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-theme/20 rounded-full filter blur-3xl opacity-40 parallax-element" data-parallax-direction="down" data-parallax-speed="7"></div>
-        
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-theme/40 to-transparent opacity-60"></div>
-        
-        <div className="container max-w-6xl px-4 mx-auto">
-          <div className="mb-12 md:mb-16 text-center max-w-3xl mx-auto perspective-section">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 uppercase">
-              <span className="text-white">JIU-JITSU</span> <span className="text-theme">FITNESS</span>
+      <section className="pt-32 pb-24">
+        <div className="container max-w-7xl px-6 mx-auto">
+          {/* Page Header */}
+          <div className="max-w-2xl mb-16 md:mb-24">
+            <p className="text-xs tracking-ultra-wide uppercase text-muted-foreground mb-4">
+              Physical Conditioning
+            </p>
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-light tracking-tight mb-6">
+              Fitness
             </h1>
-            <p className="text-muted-foreground">Track and improve your fitness to enhance your jiu-jitsu performance on and off the mat.</p>
+            <p className="text-muted-foreground leading-relaxed">
+              Track and improve your fitness to enhance your Jiu-Jitsu performance on and off the mat.
+            </p>
           </div>
-          
-          <Tabs defaultValue="overview" className="w-full perspective-section">
-            <TabsList className="grid w-full grid-cols-5 mb-8">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="strength">Strength</TabsTrigger>
-              <TabsTrigger value="conditioning">Conditioning</TabsTrigger>
-              <TabsTrigger value="flexibility">Flexibility</TabsTrigger>
-              <TabsTrigger value="recovery">Recovery</TabsTrigger>
+
+          {/* Tabs */}
+          <Tabs defaultValue="overview" className="w-full">
+            <TabsList className="bg-transparent border-b border-border/30 rounded-none h-auto p-0 mb-12 flex flex-wrap">
+              {['overview', 'strength', 'conditioning', 'flexibility', 'recovery'].map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent px-6 py-4 text-xs tracking-extra-wide uppercase"
+                >
+                  {tab}
+                </TabsTrigger>
+              ))}
             </TabsList>
-            
-            <TabsContent value="overview" className="perspective-section stagger-container">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                <div className="stagger-item">
-                  <FitnessCard 
-                    title="Strength Training" 
-                    description="Build functional strength specific to jiu-jitsu movements." 
-                    icon={Dumbbell} 
-                  />
-                </div>
-                <div className="stagger-item">
-                  <FitnessCard 
-                    title="Cardiovascular Endurance" 
-                    description="Improve your gas tank for tough rolling sessions." 
-                    icon={HeartPulse} 
-                  />
-                </div>
-                <div className="stagger-item">
-                  <FitnessCard 
-                    title="Flexibility & Mobility" 
-                    description="Enhance movement range for better guard and escapes." 
-                    icon={StretchHorizontal} 
-                  />
-                </div>
-                <div className="stagger-item">
-                  <FitnessCard 
-                    title="HIIT Training" 
-                    description="High-intensity interval training to mimic the demands of sparring." 
-                    icon={Activity} 
-                  />
-                </div>
-                <div className="stagger-item">
-                  <FitnessCard 
-                    title="Recovery & Sleep" 
-                    description="Optimize your rest periods for better performance and growth." 
-                    icon={Bed} 
-                  />
-                </div>
+
+            <TabsContent value="overview">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30">
+                {[
+                  { title: 'Strength Training', description: 'Build functional strength specific to jiu-jitsu movements.', icon: Dumbbell },
+                  { title: 'Cardiovascular Endurance', description: 'Improve your gas tank for tough rolling sessions.', icon: HeartPulse },
+                  { title: 'Flexibility & Mobility', description: 'Enhance movement range for better guard and escapes.', icon: StretchHorizontal },
+                  { title: 'HIIT Training', description: 'High-intensity interval training to mimic the demands of sparring.', icon: Activity },
+                  { title: 'Recovery & Sleep', description: 'Optimize your rest periods for better performance and growth.', icon: Bed },
+                ].map((item, index) => (
+                  <div key={index} className="bg-background">
+                    <FitnessCard {...item} />
+                  </div>
+                ))}
               </div>
             </TabsContent>
-            
+
             <TabsContent value="strength">
               <StrengthTraining />
             </TabsContent>
-            
+
             <TabsContent value="conditioning">
               <ConditioningProgram />
             </TabsContent>
-            
+
             <TabsContent value="flexibility">
               <FlexibilityTraining />
             </TabsContent>
-            
+
             <TabsContent value="recovery">
               <RecoveryStrategies />
             </TabsContent>
