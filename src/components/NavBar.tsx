@@ -13,39 +13,40 @@ export const NavBar = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const navLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'TECHNIQUES', path: '/techniques' },
-    { name: 'FITNESS', path: '/fitness' },
-    { name: 'NUTRITION', path: '/nutrition' },
+    { name: 'Home', path: '/' },
+    { name: 'Techniques', path: '/techniques' },
+    { name: 'Fitness', path: '/fitness' },
+    { name: 'Nutrition', path: '/nutrition' },
   ];
 
   const isActive = (path: string) => {
-    if (path === '/') {
-      return location.pathname === path;
-    }
+    if (path === '/') return location.pathname === path;
     return location.pathname.startsWith(path);
   };
 
@@ -61,103 +62,113 @@ export const NavBar = () => {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled 
-          ? 'bg-background/70 backdrop-blur-lg border-b border-border py-3' 
-          : 'bg-transparent py-5'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+        scrolled
+          ? 'bg-background/90 backdrop-blur-md border-b border-border/50'
+          : 'bg-transparent'
       )}
     >
-      <div className="container max-w-6xl px-4 mx-auto flex items-center justify-between">
-        <Link 
-          to="/" 
-          className="text-xl font-bold tracking-tight transition-opacity hover:opacity-80 flex items-center"
-        >
-          {/* Belt-inspired logo */}
-          <div className="relative h-8 w-10 mr-2 flex items-center justify-center">
-            {/* Black belt with red bar */}
-            <div className="absolute h-3 w-full bg-black rounded-sm"></div>
-            <div className="absolute h-3 w-6 bg-theme rounded-sm left-1/2 transform -translate-x-1/2"></div>
-            {/* White trim on edges */}
-            <div className="absolute h-3 w-1 bg-white rounded-sm left-0"></div>
-            <div className="absolute h-3 w-1 bg-white rounded-sm right-0"></div>
-          </div>
-          <span className="text-theme">Master</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {navLinks.map(link => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={cn(
-                'text-xs font-medium tracking-wide transition-all hover:text-theme uppercase',
-                isActive(link.path)
-                  ? 'text-theme'
-                  : 'text-muted-foreground'
-              )}
-            >
-              {link.name}
-            </Link>
-          ))}
-          
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="ml-2 border-primary/20 hover:border-primary/50"
-            onClick={handleAuthClick}
+      <div className="container max-w-7xl px-6 mx-auto">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="text-lg tracking-extra-wide uppercase font-light transition-opacity hover:opacity-60"
           >
-            <User className="h-4 w-4 mr-2" />
-            {user ? 'Sign Out' : 'Sign In'}
-          </Button>
-        </nav>
+            Master
+          </Link>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-12">
+            {navLinks.map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'text-xs tracking-extra-wide uppercase transition-all duration-300 editorial-underline',
+                  isActive(link.path)
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Desktop Auth Button */}
+          <div className="hidden md:flex items-center">
+            <button
+              onClick={handleAuthClick}
+              className="text-xs tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 editorial-underline"
+            >
+              {user ? 'Sign Out' : 'Sign In'}
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
-            className="p-2 focus:outline-none text-foreground"
+            className="md:hidden p-2 -mr-2 text-foreground"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
             {isOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" strokeWidth={1} />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" strokeWidth={1} />
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Overlay */}
       <div
         className={cn(
-          'fixed inset-0 bg-background/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden transition-all duration-300 ease-in-out z-40',
-          isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+          'fixed inset-0 bg-background z-40 md:hidden transition-all duration-500',
+          isOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
         )}
       >
-        <nav className="flex flex-col items-center space-y-6 p-8">
-          {navLinks.map(link => (
-            <Link
-              key={link.path}
-              to={link.path}
+        <div className="flex flex-col items-center justify-center h-full">
+          <nav className="flex flex-col items-center gap-8">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'text-2xl font-serif tracking-wide transition-all duration-500',
+                  isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
+                  isActive(link.path)
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                )}
+                style={{
+                  transitionDelay: isOpen ? `${index * 100}ms` : '0ms'
+                }}
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            <div
               className={cn(
-                'text-lg font-medium uppercase transition-all hover:text-theme',
-                isActive(link.path) ? 'text-theme' : 'text-muted-foreground'
+                'pt-8 border-t border-border/30 mt-4 transition-all duration-500',
+                isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               )}
+              style={{
+                transitionDelay: isOpen ? `${navLinks.length * 100}ms` : '0ms'
+              }}
             >
-              {link.name}
-            </Link>
-          ))}
-          
-          <Button 
-            variant="outline"
-            onClick={handleAuthClick}
-            className="mt-4 border-primary/20 hover:border-primary/50"
-          >
-            <User className="h-4 w-4 mr-2" />
-            {user ? 'Sign Out' : 'Sign In'}
-          </Button>
-        </nav>
+              <button
+                onClick={handleAuthClick}
+                className="text-sm tracking-extra-wide uppercase text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {user ? 'Sign Out' : 'Sign In'}
+              </button>
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   );

@@ -1,88 +1,94 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* Luxury Minimalist Design System - Inspired by High-Fashion Editorial */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  --background: 215 35% 8%;
+  /* Dark Mode - Sophisticated Black */
+  --background: 0 0% 4%;
   --foreground: 0 0% 98%;
 
-  --card: 215 35% 10%;
+  --card: 0 0% 6%;
   --card-foreground: 0 0% 98%;
 
-  --popover: 215 35% 9%;
+  --popover: 0 0% 5%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 355 84% 56%;
+  /* Warm gold/bronze accent for luxury feel */
+  --primary: 35 30% 50%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 215 35% 15%;
+  --secondary: 0 0% 10%;
   --secondary-foreground: 0 0% 98%;
 
-  --muted: 215 35% 15%;
-  --muted-foreground: 0 0% 70%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 55%;
 
-  --accent: 355 84% 56%;
+  /* Subtle warm accent */
+  --accent: 35 25% 45%;
   --accent-foreground: 0 0% 98%;
 
-  --destructive: 0 84.2% 60.2%;
+  --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 215 35% 15%;
-  --input: 215 35% 15%;
-  --ring: 355 84% 56%;
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 35 30% 50%;
 
-  --radius: 0.5rem;
+  --radius: 0px;
 
-  --bjj-blue: 220 70% 50%;
-  --bjj-purple: 270 60% 60%;
-  --bjj-brown: 30 70% 50%;
-  --bjj-black: 220 20% 5%;
-  --bjj-white: 0 0% 95%;
+  /* BJJ Belt Colors - More muted, sophisticated */
+  --bjj-blue: 215 35% 40%;
+  --bjj-purple: 260 25% 45%;
+  --bjj-brown: 25 35% 40%;
+  --bjj-black: 0 0% 8%;
+  --bjj-white: 0 0% 92%;
 
-  --sidebar-background: 215 35% 12%;
+  /* Sidebar colors */
+  --sidebar-background: 0 0% 5%;
   --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 355 84% 56%;
+  --sidebar-primary: 35 30% 50%;
   --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 215 35% 20%;
+  --sidebar-accent: 0 0% 10%;
   --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-border: 215 35% 20%;
-  --sidebar-ring: 355 84% 56%;
+  --sidebar-border: 0 0% 12%;
+  --sidebar-ring: 35 30% 50%;
 }
 
 .light {
-  --background: 0 0% 100%;
-  --foreground: 215 35% 8%;
+  --background: 40 20% 98%;
+  --foreground: 0 0% 8%;
 
-  --card: 0 0% 98%;
-  --card-foreground: 215 35% 8%;
+  --card: 40 15% 96%;
+  --card-foreground: 0 0% 8%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 215 35% 8%;
+  --popover: 40 20% 98%;
+  --popover-foreground: 0 0% 8%;
 
-  --primary: 355 84% 56%;
+  --primary: 35 30% 40%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 215 15% 90%;
-  --secondary-foreground: 215 35% 8%;
+  --secondary: 40 10% 92%;
+  --secondary-foreground: 0 0% 8%;
 
-  --muted: 215 15% 90%;
-  --muted-foreground: 215 35% 40%;
+  --muted: 40 10% 92%;
+  --muted-foreground: 0 0% 45%;
 
-  --accent: 355 84% 56%;
+  --accent: 35 25% 40%;
   --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 84.2% 60.2%;
+  --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 215 15% 85%;
-  --input: 215 15% 85%;
-  --ring: 355 84% 56%;
+  --border: 40 10% 88%;
+  --input: 40 10% 88%;
+  --ring: 35 30% 40%;
 
-  --sidebar-background: 215 15% 96%;
-  --sidebar-foreground: 215 35% 8%;
-  --sidebar-primary: 355 84% 56%;
+  --sidebar-background: 40 15% 96%;
+  --sidebar-foreground: 0 0% 8%;
+  --sidebar-primary: 35 30% 40%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 215 15% 90%;
-  --sidebar-accent-foreground: 215 35% 8%;
-  --sidebar-border: 215 15% 85%;
-  --sidebar-ring: 355 84% 56%;
+  --sidebar-accent: 40 10% 92%;
+  --sidebar-accent-foreground: 0 0% 8%;
+  --sidebar-border: 40 10% 88%;
+  --sidebar-ring: 35 30% 40%;
 }

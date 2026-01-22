@@ -1,8 +1,7 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavBar } from '@/components/NavBar';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import { setupScrollAnimations } from '@/lib/animations';
 
 interface MainLayoutProps {
@@ -11,41 +10,42 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
-  
+
   // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Enhanced intersection observer for more sophisticated reveal animations
+  // Setup scroll animations
   useEffect(() => {
-    const cleanupAnimations = setupScrollAnimations();
-    return cleanupAnimations;
+    const cleanup = setupScrollAnimations();
+    return cleanup;
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <NavBar />
-      <main className="flex-grow relative page-transition-wrapper">
-        {/* Animated background with parallax effect - adjusted opacity for better contrast */}
-        <div className="absolute inset-0 bg-dark-clouds bg-cover bg-center bg-no-repeat opacity-30 pointer-events-none -z-10 parallax-bg"></div>
-        
-        {/* Subtle gradient overlay to enhance text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background/80 pointer-events-none -z-9"></div>
-        
-        {/* Particle overlay effect - more subtle */}
-        <div className="absolute inset-0 particle-overlay opacity-30 pointer-events-none -z-8"></div>
-        
-        {/* Animated content wrapper with route transition */}
-        <div key={location.pathname} className="animate-page-transition">
+
+      <main className="flex-grow">
+        <div key={location.pathname} className="animate-fade-in">
           {children}
         </div>
       </main>
-      <footer className="py-8 bg-black/50 backdrop-blur-sm border-t border-white/10 relative">
-        <div className="container max-w-6xl px-4 mx-auto text-center">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} <span className="text-theme">Master</span>. All rights reserved.
-          </p>
+
+      {/* Minimal Footer */}
+      <footer className="py-12 border-t border-border/30">
+        <div className="container max-w-7xl px-6 mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo */}
+            <p className="text-sm tracking-extra-wide uppercase font-light">
+              Master
+            </p>
+
+            {/* Copyright */}
+            <p className="text-xs text-muted-foreground tracking-wide">
+              {new Date().getFullYear()} All Rights Reserved
+            </p>
+          </div>
         </div>
       </footer>
     </div>
