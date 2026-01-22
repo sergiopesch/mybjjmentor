@@ -1,7 +1,5 @@
-
-import { useContext } from 'react'
-import { supabase } from '@/lib/supabase-client'
+import { supabase } from '@/lib/supabase';
 
 export const useSupabase = () => {
-  return { supabase }
-}
+  return { supabase };
+};

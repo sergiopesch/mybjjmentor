@@ -1,20 +1,9 @@
-
 import React, { useState } from 'react';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  Apple, 
-  Carrot, 
-  Utensils, 
-  Vegan, 
-  CookingPot, 
-  BarChart3, 
-  CalendarDays,
-  Droplets,
-  ShoppingBag
-} from 'lucide-react';
-import { 
+import { Apple, Carrot, Utensils, Vegan, CookingPot } from 'lucide-react';
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -26,117 +15,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { ChartContainer } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
-// Sample macro data
-const macroData = [
-  {
-    name: 'Mon',
-    protein: 120,
-    carbs: 150,
-    fat: 60,
-  },
-  {
-    name: 'Tue',
-    protein: 110,
-    carbs: 140,
-    fat: 65,
-  },
-  {
-    name: 'Wed',
-    protein: 130,
-    carbs: 120,
-    fat: 55,
-  },
-  {
-    name: 'Thu',
-    protein: 115,
-    carbs: 130,
-    fat: 60,
-  },
-  {
-    name: 'Fri',
-    protein: 125,
-    carbs: 110,
-    fat: 50,
-  },
-  {
-    name: 'Sat',
-    protein: 140,
-    carbs: 180,
-    fat: 70,
-  },
-  {
-    name: 'Sun',
-    protein: 100,
-    carbs: 100,
-    fat: 45,
-  },
-];
-
-// Sample meal plans
-const mealPlans = [
-  {
-    id: 1,
-    title: "Competition Prep",
-    description: "High protein, moderate carbs for peak performance",
-    meals: [
-      { name: "Breakfast", content: "Protein oats with banana and berries" },
-      { name: "Lunch", content: "Grilled chicken breast with quinoa and vegetables" },
-      { name: "Pre-Training", content: "Rice cakes with almond butter" },
-      { name: "Post-Training", content: "Protein shake with quick-digesting carbs" },
-      { name: "Dinner", content: "Salmon with sweet potatoes and steamed greens" }
-    ]
-  },
-  {
-    id: 2,
-    title: "Recovery Focus",
-    description: "Anti-inflammatory foods to support muscle recovery",
-    meals: [
-      { name: "Breakfast", content: "Green smoothie with protein powder and avocado" },
-      { name: "Lunch", content: "Turkey and avocado wrap with leafy greens" },
-      { name: "Snack", content: "Greek yogurt with berries and honey" },
-      { name: "Dinner", content: "Grass-fed beef with roasted vegetables and turmeric rice" }
-    ]
-  }
-];
-
-// Sample supplements
-const supplements = [
-  {
-    id: 1,
-    name: "Protein Powder",
-    timing: "Post-workout",
-    benefits: "Muscle recovery and growth",
-    dosage: "1-2 scoops (25-50g)",
-    evidence: "Strong scientific support for muscle protein synthesis"
-  },
-  {
-    id: 2,
-    name: "Creatine Monohydrate",
-    timing: "Daily (5g)",
-    benefits: "Increased power output and recovery",
-    dosage: "5g daily",
-    evidence: "One of the most researched and proven supplements"
-  },
-  {
-    id: 3,
-    name: "Fish Oil (Omega-3)",
-    timing: "With meals",
-    benefits: "Reduced inflammation, joint health",
-    dosage: "1-3g combined EPA/DHA daily",
-    evidence: "Strong evidence for anti-inflammatory effects"
-  },
-  {
-    id: 4,
-    name: "Vitamin D3",
-    timing: "With fatty meal",
-    benefits: "Immune function, bone health",
-    dosage: "1000-5000 IU daily",
-    evidence: "Essential for athletes, especially with limited sun exposure"
-  }
-];
+import { macroData, mealPlans, supplements } from '@/components/nutrition/data';
 
 const NutritionCard = ({ 
   title, 
