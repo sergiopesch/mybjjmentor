@@ -59,6 +59,7 @@ export default {
 					brown: 'hsl(var(--bjj-brown))',
 					black: 'hsl(var(--bjj-black))',
 					white: 'hsl(var(--bjj-white))',
+					red: 'hsl(var(--bjj-red))',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

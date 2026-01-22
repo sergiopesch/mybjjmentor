@@ -1,47 +1,238 @@
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  /* Simplify animations on mobile */
-  .parallax-element {
-    transform: none !important;
+/* Brazilian Jiu-Jitsu - Responsive Design System */
+
+/* ============================================
+   MOBILE FIRST BASE STYLES
+   ============================================ */
+
+/* Small devices (phones, 320px and up) */
+@media (max-width: 479px) {
+  /* Typography scaling for small screens */
+  .font-serif {
+    letter-spacing: -0.01em;
   }
-  
-  /* Ensure card hover effects still look good on touch devices */
-  .effect-card:hover {
-    transform: none;
+
+  /* Container padding adjustments */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-  
-  /* Optimize video player controls for mobile */
-  .video-controls {
-    padding: 16px 12px;
+
+  /* Hero section mobile optimization */
+  .hero-title {
+    font-size: 2.25rem;
+    line-height: 1.1;
   }
-  
-  /* Ensure proper text wrapping on mobile */
-  h1, h2, h3 {
-    word-break: break-word;
-    hyphens: auto;
+
+  /* Feature cards stack properly */
+  .feature-grid > * {
+    margin-bottom: 1px;
   }
-  
-  /* Make buttons more touch-friendly */
-  .btn, button {
+
+  /* Stats grid adjustments */
+  .stats-row {
+    gap: 1rem;
+  }
+
+  /* Button touch targets */
+  button,
+  .btn,
+  a[role="button"],
+  [type="button"],
+  [type="submit"] {
     min-height: 44px;
+    min-width: 44px;
   }
-  
-  /* Better spacing for technique cards */
-  .technique-card {
-    margin-bottom: 1rem;
-  }
-  
-  /* Optimize carousel for mobile */
-  .carousel-navigation {
-    margin-top: 1rem;
+
+  /* Navigation mobile menu improvements */
+  .mobile-nav-link {
+    font-size: 1.5rem;
+    padding: 0.75rem 0;
   }
 }
 
-/* Ensure proper video sizing in carousel */
+/* ============================================
+   TABLET STYLES (480px - 767px)
+   ============================================ */
+@media (min-width: 480px) and (max-width: 767px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Two-column grids where appropriate */
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Hero title sizing */
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+
+/* ============================================
+   MEDIUM SCREENS (768px and up)
+   ============================================ */
+@media (min-width: 768px) {
+  /* Enable hover effects on non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    .hover-lift:hover {
+      transform: translateY(-4px);
+    }
+
+    .hover-glow:hover {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+  }
+}
+
+/* ============================================
+   MOBILE SPECIFIC (under 768px)
+   ============================================ */
+@media (max-width: 767px) {
+  /* Disable complex animations on mobile */
+  .parallax-element {
+    transform: none !important;
+  }
+
+  /* Card hover effects simplified for touch */
+  .effect-card:hover {
+    transform: none;
+  }
+
+  /* Video player touch-friendly controls */
+  .video-controls {
+    padding: 16px 12px;
+  }
+
+  /* Better text wrapping */
+  h1, h2, h3, h4, h5, h6 {
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  /* Touch-friendly button sizing */
+  .btn,
+  button:not(.carousel-dot) {
+    min-height: 44px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Technique cards spacing */
+  .technique-card {
+    margin-bottom: 1rem;
+  }
+
+  /* Carousel mobile adjustments */
+  .carousel-navigation {
+    margin-top: 1rem;
+  }
+
+  /* Full width carousel items on mobile */
+  .carousel-item-mobile {
+    flex: 0 0 100%;
+  }
+
+  /* BJJ Triangle logo sizing */
+  .bjj-logo-hero {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  /* Belt rank indicator hidden on mobile */
+  .belt-indicator {
+    display: none;
+  }
+
+  /* Section padding reduction */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Mobile navigation overlay */
+  .mobile-nav-overlay {
+    padding-top: 5rem;
+  }
+
+  /* Stats grid mobile layout */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* CTA buttons stack on mobile */
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .cta-buttons > * {
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Hide decorative pipe separator on mobile */
+  .cta-separator {
+    display: none;
+  }
+
+  /* Feature card padding reduction */
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  /* Footer mobile layout */
+  footer .flex-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+}
+
+/* ============================================
+   LARGE SCREENS (1024px and up)
+   ============================================ */
+@media (min-width: 1024px) {
+  /* Enable advanced hover effects */
+  .card-3d-hover:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+  }
+
+  /* Larger hero content */
+  .hero-content {
+    max-width: 56rem;
+  }
+}
+
+/* ============================================
+   EXTRA LARGE SCREENS (1280px and up)
+   ============================================ */
+@media (min-width: 1280px) {
+  /* Max container width */
+  .container {
+    max-width: 1200px;
+  }
+
+  /* Enhanced spacing for large screens */
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* ============================================
+   CAROUSEL RESPONSIVE
+   ============================================ */
+
+/* Carousel container aspect ratio */
 .technique-carousel-container .aspect-video {
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%; /* 16:9 */
   position: relative;
 }
 
@@ -53,35 +244,172 @@
   height: 100%;
 }
 
-/* Prefers-reduced-motion support */
-@media (prefers-reduced-motion) {
-  *, *::before, *::after {
+/* Carousel item sizing */
+@media (max-width: 639px) {
+  .carousel-item {
+    flex: 0 0 100%;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .carousel-item {
+    flex: 0 0 50%;
+    padding-left: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-item {
+    flex: 0 0 33.333%;
+    padding-left: 1rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .parallax-element,
   .stagger-item,
   .layer-item,
   .perspective-section,
   .fade-in-section,
   .slide-in-section,
-  .rotate-in-section,
-  .animated-gradient {
+  .rotate-in-section {
     transform: none !important;
     transition: opacity 0.1s linear !important;
     animation: none !important;
-    background: #ea384c !important;
+  }
+
+  .animated-gradient {
+    background: hsl(var(--primary)) !important;
     -webkit-background-clip: initial !important;
     background-clip: initial !important;
     color: inherit !important;
   }
-  
+
   .split-letter {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  /* Disable hover transforms */
+  .hover-lift:hover,
+  .card-3d-hover:hover {
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE
+   ============================================ */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 40%;
+    --muted-foreground: 0 0% 70%;
+  }
+
+  .light {
+    --border: 0 0% 30%;
+    --muted-foreground: 0 0% 25%;
+  }
+
+  /* Ensure sufficient contrast for BJJ belt colors */
+  .bg-bjj-white {
+    border: 1px solid hsl(var(--foreground));
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (pointer: coarse) {
+  /* Larger touch targets */
+  .nav-link {
+    padding: 0.75rem 1rem;
+  }
+
+  /* Disable hover-dependent interactions */
+  .hover-only {
+    display: none;
+  }
+
+  /* Carousel controls larger for touch */
+  .carousel-prev,
+  .carousel-next {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Increase tap target for technique cards */
+  .technique-card {
+    min-height: 200px;
+  }
+}
+
+/* ============================================
+   LANDSCAPE MOBILE
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Reduce hero section height in landscape */
+  .hero-section {
+    min-height: auto;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Hide scroll indicator in landscape mobile */
+  .scroll-indicator {
+    display: none;
+  }
+
+  /* Reduce vertical spacing */
+  .section-spacing {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  /* Hide navigation and non-essential elements */
+  header,
+  footer,
+  .mobile-menu,
+  .scroll-indicator,
+  .belt-indicator,
+  .video-player,
+  button {
+    display: none !important;
+  }
+
+  /* Force light background for printing */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Ensure links are visible */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
   }
 }

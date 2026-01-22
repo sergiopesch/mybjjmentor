@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Menu, X, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
+import { BJJTriangleLogo } from './BJJTriangleLogo';
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,9 +73,17 @@ export const NavBar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="text-lg tracking-extra-wide uppercase font-light transition-opacity hover:opacity-60"
+            className="flex items-center gap-2.5 transition-opacity hover:opacity-70"
           >
-            Master
+            <BJJTriangleLogo size="sm" variant="default" animated />
+            <div className="flex flex-col">
+              <span className="text-base tracking-extra-wide uppercase font-light leading-none">
+                Master JJ
+              </span>
+              <span className="text-[9px] tracking-wider uppercase text-muted-foreground hidden sm:block">
+                Brazilian Jiu-Jitsu
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -131,6 +139,18 @@ export const NavBar = () => {
         )}
       >
         <div className="flex flex-col items-center justify-center h-full">
+          {/* Mobile Logo */}
+          <div
+            className={cn(
+              'mb-12 transition-all duration-500',
+              isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            )}
+          >
+            <BJJTriangleLogo size="xl" variant="gradient" />
+            <p className="text-xs tracking-ultra-wide uppercase text-muted-foreground text-center mt-4">
+              Mind - Body - Spirit
+            </p>
+          </div>
           <nav className="flex flex-col items-center gap-8">
             {navLinks.map((link, index) => (
               <Link
