@@ -1,94 +1,102 @@
 
-/* Luxury Minimalist Design System - Inspired by High-Fashion Editorial */
+/* Brazilian Jiu-Jitsu Design System - Gracie Heritage Inspired */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  /* Dark Mode - Sophisticated Black */
-  --background: 0 0% 4%;
-  --foreground: 0 0% 98%;
+  /* Dark Mode - Mat Black / Academy Feel */
+  --background: 220 15% 5%;
+  --foreground: 40 10% 96%;
 
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 98%;
+  --card: 220 12% 8%;
+  --card-foreground: 40 10% 96%;
 
-  --popover: 0 0% 5%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 220 15% 6%;
+  --popover-foreground: 40 10% 96%;
 
-  /* Warm gold/bronze accent for luxury feel */
-  --primary: 35 30% 50%;
+  /* Primary - Deep BJJ Red/Gold inspired by traditional martial arts */
+  --primary: 15 70% 50%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 220 10% 12%;
+  --secondary-foreground: 40 10% 96%;
 
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 55%;
+  --muted: 220 10% 15%;
+  --muted-foreground: 220 5% 50%;
 
-  /* Subtle warm accent */
-  --accent: 35 25% 45%;
-  --accent-foreground: 0 0% 98%;
+  /* Accent - warm bronze/copper */
+  --accent: 25 50% 45%;
+  --accent-foreground: 40 10% 96%;
 
   --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
-  --ring: 35 30% 50%;
+  --border: 220 10% 18%;
+  --input: 220 10% 18%;
+  --ring: 15 70% 50%;
 
   --radius: 0px;
 
-  /* BJJ Belt Colors - More muted, sophisticated */
-  --bjj-blue: 215 35% 40%;
-  --bjj-purple: 260 25% 45%;
-  --bjj-brown: 25 35% 40%;
-  --bjj-black: 0 0% 8%;
-  --bjj-white: 0 0% 92%;
+  /* BJJ Belt Colors - Authentic belt hues */
+  --bjj-white: 40 20% 95%;
+  --bjj-blue: 210 70% 35%;
+  --bjj-purple: 280 45% 35%;
+  --bjj-brown: 25 55% 30%;
+  --bjj-black: 0 0% 10%;
+  --bjj-red: 0 70% 40%;
 
   /* Sidebar colors */
-  --sidebar-background: 0 0% 5%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 35 30% 50%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 0 0% 10%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-border: 0 0% 12%;
-  --sidebar-ring: 35 30% 50%;
+  --sidebar-background: 220 15% 6%;
+  --sidebar-foreground: 40 10% 96%;
+  --sidebar-primary: 15 70% 50%;
+  --sidebar-primary-foreground: 40 10% 96%;
+  --sidebar-accent: 220 10% 12%;
+  --sidebar-accent-foreground: 40 10% 96%;
+  --sidebar-border: 220 10% 15%;
+  --sidebar-ring: 15 70% 50%;
+
+  /* Chart colors */
+  --chart-1: 15 70% 50%;
+  --chart-2: 210 70% 35%;
+  --chart-3: 280 45% 35%;
+  --chart-4: 25 55% 30%;
+  --chart-5: 40 20% 95%;
 }
 
 .light {
-  --background: 40 20% 98%;
-  --foreground: 0 0% 8%;
+  --background: 40 30% 97%;
+  --foreground: 220 20% 10%;
 
-  --card: 40 15% 96%;
-  --card-foreground: 0 0% 8%;
+  --card: 40 25% 95%;
+  --card-foreground: 220 20% 10%;
 
-  --popover: 40 20% 98%;
-  --popover-foreground: 0 0% 8%;
+  --popover: 40 30% 97%;
+  --popover-foreground: 220 20% 10%;
 
-  --primary: 35 30% 40%;
+  --primary: 15 70% 45%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 40 10% 92%;
-  --secondary-foreground: 0 0% 8%;
+  --secondary: 40 15% 90%;
+  --secondary-foreground: 220 20% 10%;
 
-  --muted: 40 10% 92%;
-  --muted-foreground: 0 0% 45%;
+  --muted: 40 15% 90%;
+  --muted-foreground: 220 10% 40%;
 
-  --accent: 35 25% 40%;
+  --accent: 25 50% 40%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 40 10% 88%;
-  --input: 40 10% 88%;
-  --ring: 35 30% 40%;
+  --border: 40 15% 85%;
+  --input: 40 15% 85%;
+  --ring: 15 70% 45%;
 
-  --sidebar-background: 40 15% 96%;
-  --sidebar-foreground: 0 0% 8%;
-  --sidebar-primary: 35 30% 40%;
+  --sidebar-background: 40 25% 95%;
+  --sidebar-foreground: 220 20% 10%;
+  --sidebar-primary: 15 70% 45%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 40 10% 92%;
-  --sidebar-accent-foreground: 0 0% 8%;
-  --sidebar-border: 40 10% 88%;
-  --sidebar-ring: 35 30% 40%;
+  --sidebar-accent: 40 15% 90%;
+  --sidebar-accent-foreground: 220 20% 10%;
+  --sidebar-border: 40 15% 85%;
+  --sidebar-ring: 15 70% 45%;
 }
