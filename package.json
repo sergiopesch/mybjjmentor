@@ -1,10 +1,15 @@
 {
   "name": "master-jj",
   "private": true,
+  "packageManager": "npm@11.17.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "version": "1.0.0",
   "type": "module",
   "description": "BJJ Training and Development Platform",
   "scripts": {
+    "audit:ci": "node scripts/audit-ci.mjs",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
