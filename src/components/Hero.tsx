@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowRight, Shield, Target, Users } from 'lucide-react';
 import { BJJTriangleLogo } from './BJJTriangleLogo';
 

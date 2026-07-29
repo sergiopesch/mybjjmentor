@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { NavBar } from '@/components/NavBar';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router';
 import { setupScrollAnimations } from '@/lib/animations';
 import { BJJTriangleLogo } from '@/components/BJJTriangleLogo';
 

@@ -6,7 +6,7 @@ import { BJJTriangleLogo } from '@/components/BJJTriangleLogo';
 import { Search, Calendar, BarChart3, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const Techniques = () => {
   const [searchQuery, setSearchQuery] = useState('');

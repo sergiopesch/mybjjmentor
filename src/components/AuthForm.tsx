@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
 import { SocialButton } from './auth/SocialButton';
 import { AuthErrorAlert } from './auth/AuthErrorAlert';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { GoogleIcon } from './auth/GoogleIcon';
 import { XIcon } from './auth/XIcon';
 import { Input } from './ui/input';

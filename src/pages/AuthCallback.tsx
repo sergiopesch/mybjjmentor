@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { supabase } from '@/lib/supabase';
 import { MainLayout } from '@/layouts/MainLayout';
 import { Loader2 } from 'lucide-react';
