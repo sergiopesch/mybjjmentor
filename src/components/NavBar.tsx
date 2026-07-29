@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';

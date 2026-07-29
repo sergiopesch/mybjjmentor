@@ -6,7 +6,7 @@ import { FeatureCard } from '@/components/FeatureCard';
 import { TechniqueCarousel } from '@/components/TechniqueCarousel';
 import { BJJTriangleLogo } from '@/components/BJJTriangleLogo';
 import { Video, Calendar, BarChart3, Target, Dumbbell, Utensils, ArrowRight, Shield, Award, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const Index = () => {
   useEffect(() => {
